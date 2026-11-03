@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Namoudusi\Webinars\Access;
 
 /**
- * Grants and revokes webinar access. Other modules react via the
- * `nmd_access_granted` and `nmd_access_revoked` actions (both receive the Entitlement).
+ * Grants and revokes webinar access. Other modules react via the actions
+ * `nmd_access_granted` (Entitlement, bool $isNew – new or reactivated access) and
+ * `nmd_access_revoked` (Entitlement).
  */
 final class AccessService
 {
@@ -30,11 +31,11 @@ final class AccessService
         $now = Clock::now();
         $existing = $this->entitlements->find($userId, $productId);
 
+        $wasActive = $existing?->isActive($now) ?? false;
         if ($existing === null) {
             $id = $this->entitlements->create($userId, $productId, $source, $orderId, $orderItemId, $now, $expiresAt);
         } else {
             $id = $existing->id;
-            $wasActive = $existing->isActive($now);
             $this->entitlements->update($id, [
                 'source' => $source,
                 'order_id' => $orderId,
@@ -49,10 +50,9 @@ final class AccessService
 
         $entitlement = $this->entitlements->findById($id);
         if ($entitlement === null) {
-            // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- integer, not rendered as HTML.
             throw new \RuntimeException(sprintf('Entitlement %d could not be saved.', $id));
         }
-        do_action('nmd_access_granted', $entitlement);
+        do_action('nmd_access_granted', $entitlement, !$wasActive);
         return $entitlement;
     }
 

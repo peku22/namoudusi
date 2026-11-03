@@ -17,12 +17,22 @@
         <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
     </rule>
 
+    <!-- Translatable sentences make 120 too tight; 150 keeps lines readable. -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="150"/>
+        </properties>
+    </rule>
+
     <!-- Templates are HTML-heavy; long lines there are fine. -->
     <rule ref="Generic.Files.LineLength">
         <exclude-pattern>templates/*</exclude-pattern>
     </rule>
 
-    <rule ref="WordPress.Security"/>
+    <rule ref="WordPress.Security">
+        <!-- Exception messages go to logs, never into HTML. -->
+        <exclude name="WordPress.Security.EscapeOutput.ExceptionNotEscaped"/>
+    </rule>
     <rule ref="WordPress.DB"/>
     <rule ref="WordPress.WP.I18n">
         <properties>

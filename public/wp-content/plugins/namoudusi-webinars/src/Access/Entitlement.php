@@ -25,6 +25,7 @@ final class Entitlement
         public readonly ?\DateTimeImmutable $revokedAt,
         public readonly ?string $zoomRegistrantId,
         public readonly ?string $zoomJoinUrl,
+        public readonly ?string $zoomMeetingId = null,
     ) {
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Namoudusi\Webinars\Database;
 
+use Namoudusi\Webinars\Database\Migrations\AddZoomMeetingId;
 use Namoudusi\Webinars\Database\Migrations\CreateEntitlementsTable;
 
 /**
@@ -20,6 +21,7 @@ final class Migrator
      */
     public const MIGRATIONS = [
         CreateEntitlementsTable::class,
+        AddZoomMeetingId::class,
     ];
 
     public static function targetVersion(): int

@@ -163,6 +163,7 @@ final class WebinarFields
             return;
         }
 
+        $previous = Webinar::fromProduct($product);
         $product->update_meta_data(Webinar::META_TYPE, $type->value);
         $product->set_virtual(true);
         $product->set_sold_individually(true);
@@ -181,6 +182,12 @@ final class WebinarFields
         $product->update_meta_data(Webinar::META_ZOOM_ID, $zoomId);
         $zoomKind = ZoomKind::tryFrom($input(Webinar::META_ZOOM_KIND)) ?? ZoomKind::Meeting;
         $product->update_meta_data(Webinar::META_ZOOM_KIND, $zoomKind->value);
+
+        $zoomChanged = $zoomId !== '' && ($zoomId !== $previous?->zoomId || $zoomKind !== $previous->zoomKind);
+        if ($type === WebinarType::Live && $zoomChanged) {
+            // Buyers get (re)registered by an async job once the product is saved.
+            do_action('nmd_webinar_zoom_changed', $product->get_id());
+        }
 
         $this->saveDocuments($product);
 

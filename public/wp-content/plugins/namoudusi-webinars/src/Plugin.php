@@ -12,10 +12,13 @@ use Namoudusi\Webinars\Account\ProductPage;
 use Namoudusi\Webinars\Account\WebinarsEndpoint;
 use Namoudusi\Webinars\Admin\AccessAdmin;
 use Namoudusi\Webinars\Cli\AccessCommand;
+use Namoudusi\Webinars\Cli\ZoomCommand;
 use Namoudusi\Webinars\Database\Migrator;
 use Namoudusi\Webinars\Documents\DocumentStorage;
+use Namoudusi\Webinars\Email\Emails;
 use Namoudusi\Webinars\Product\WebinarFields;
 use Namoudusi\Webinars\Video\VideoPlayer;
+use Namoudusi\Webinars\Zoom\ZoomRegistrar;
 
 final class Plugin
 {
@@ -57,6 +60,9 @@ final class Plugin
         (new WebinarsEndpoint($access, $entitlements))->register();
         (new ProductPage($access))->register();
         (new VideoPlayer())->register();
+        $zoomRegistrar = new ZoomRegistrar($entitlements);
+        $zoomRegistrar->register();
+        (new Emails())->register();
         add_action('before_delete_post', [self::class, 'deleteProductDocuments'], 10, 2);
         if (is_admin()) {
             (new WebinarFields())->register();
@@ -64,6 +70,7 @@ final class Plugin
         }
         if (defined('WP_CLI') && WP_CLI) {
             \WP_CLI::add_command('nmd access', new AccessCommand($access, $entitlements));
+            \WP_CLI::add_command('nmd zoom', new ZoomCommand($zoomRegistrar));
         }
     }
 

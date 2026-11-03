@@ -247,3 +247,63 @@ msgstr "Video teď nelze přehrát. Zkuste to prosím později, nebo nás kontak
 
 msgid "The Bunny video ID should look like 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID)."
 msgstr "ID videa v Bunny má tvar 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID)."
+
+msgid "This webinar has no date yet."
+msgstr "Tento webinář zatím nemá termín."
+
+msgid "Zoom: registered"
+msgstr "Zoom: zaregistrován"
+
+msgid "Zoom: waiting for registration"
+msgstr "Zoom: čeká na registraci"
+
+msgid "Your personal Zoom link will be on the webinar page: %s"
+msgstr "Váš osobní odkaz na Zoom najdete na stránce webináře: %s"
+
+msgid "Sent on new webinar access (purchase or manual grant); for live webinars with the personal Zoom link and a calendar file."
+msgstr "Odesílá se při novém přístupu k webináři (nákup nebo ruční udělení); u živých webinářů s osobním odkazem na Zoom a souborem do kalendáře."
+
+msgid "Webinar access granted"
+msgstr "Udělený přístup k webináři"
+
+msgid "Your access to {webinar}"
+msgstr "Váš přístup k webináři {webinar}"
+
+msgid "Your webinar is ready"
+msgstr "Váš webinář je připraven"
+
+msgid "Thank you! You now have access to the webinar below. You will always find it in your account under My webinars."
+msgstr "Děkujeme! Nyní máte přístup k webináři níže. Kdykoli ho najdete ve svém účtu v sekci Moje webináře."
+
+msgid "Webinar Zoom link"
+msgstr "Odkaz na Zoom pro webinář"
+
+msgid "Sent when the personal Zoom link becomes available or changes after the purchase."
+msgstr "Odesílá se, když je osobní odkaz na Zoom po nákupu k dispozici nebo se změní."
+
+msgid "Your Zoom link for {webinar}"
+msgstr "Váš odkaz na Zoom: {webinar}"
+
+msgid "Your Zoom link is ready"
+msgstr "Váš odkaz na Zoom je připraven"
+
+msgid "Your personal link to the live webinar is ready. Please do not share it – it only works for you."
+msgstr "Váš osobní odkaz na živý webinář je připraven. Prosíme, nesdílejte ho – funguje jen pro vás."
+
+msgid "When:"
+msgstr "Kdy:"
+
+msgid "We will send you your personal Zoom link before the webinar starts. You will also find it on the webinar page."
+msgstr "Osobní odkaz na Zoom vám pošleme před začátkem webináře. Najdete ho také na stránce webináře."
+
+msgid "Open the webinar page"
+msgstr "Otevřít stránku webináře"
+
+msgid "The attached calendar file adds the webinar to your calendar."
+msgstr "Přiložený soubor přidá webinář do vašeho kalendáře."
+
+msgid "Add to calendar (.ics)"
+msgstr "Přidat do kalendáře (.ics)"
+
+msgid "Join: %1$s\nWebinar page: %2$s"
+msgstr "Připojit se: %1$s\nStránka webináře: %2$s"

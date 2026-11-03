@@ -8,6 +8,7 @@ use Namoudusi\Webinars\Access\AccessFormatter;
 use Namoudusi\Webinars\Access\AccessService;
 use Namoudusi\Webinars\Access\Entitlement;
 use Namoudusi\Webinars\Access\EntitlementRepository;
+use Namoudusi\Webinars\Product\Webinar;
 use Namoudusi\Webinars\Product\WebinarProducts;
 
 /**
@@ -56,11 +57,21 @@ final class AccessAdmin
         }
         echo '<ul>';
         foreach ($entitlements as $entitlement) {
+            $webinar = Webinar::fromProductId($entitlement->productId);
+            $zoom = '';
+            if ($webinar !== null && $webinar->isLive() && $entitlement->revokedAt === null) {
+                $zoom = '<br>' . esc_html(
+                    (string) $entitlement->zoomJoinUrl !== ''
+                        ? __('Zoom: registered', 'namoudusi-webinars')
+                        : __('Zoom: waiting for registration', 'namoudusi-webinars')
+                );
+            }
             printf(
-                '<li><strong>%s</strong><br>%s, %s</li>',
+                '<li><strong>%s</strong><br>%s, %s%s</li>',
                 esc_html($this->productName($entitlement->productId)),
                 esc_html(AccessFormatter::status($entitlement)),
-                esc_html(AccessFormatter::expiry($entitlement->expiresAt))
+                esc_html(AccessFormatter::expiry($entitlement->expiresAt)),
+                $zoom // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
             );
         }
         echo '</ul>';

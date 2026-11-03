@@ -8,6 +8,7 @@ use Namoudusi\Webinars\Access\AccessService;
 use Namoudusi\Webinars\Access\Clock;
 use Namoudusi\Webinars\Access\Entitlement;
 use Namoudusi\Webinars\Access\EntitlementRepository;
+use Namoudusi\Webinars\Calendar\WebinarCalendar;
 use Namoudusi\Webinars\Documents\Document;
 use Namoudusi\Webinars\Documents\DocumentStorage;
 use Namoudusi\Webinars\Product\Webinar;
@@ -18,6 +19,7 @@ use Namoudusi\Webinars\Product\Webinar;
  *   /muj-ucet/webinare/                      list
  *   /muj-ucet/webinare/{product}/            detail
  *   /muj-ucet/webinare/{product}/dokument/{document}/   download
+ *   /muj-ucet/webinare/{product}/kalendar.ics           personal calendar file (live)
  */
 final class WebinarsEndpoint
 {
@@ -41,6 +43,11 @@ final class WebinarsEndpoint
         add_action('woocommerce_account_' . self::ENDPOINT . '_endpoint', [$this, 'render']);
         add_action('template_redirect', [$this, 'serveDocument']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueStyles']);
+    }
+
+    public static function calendarUrl(int $productId): string
+    {
+        return wc_get_endpoint_url(self::ENDPOINT, $productId . '/kalendar.ics', wc_get_page_permalink('myaccount'));
     }
 
     public static function url(int $productId = 0, string $documentId = ''): string
@@ -123,6 +130,9 @@ final class WebinarsEndpoint
         if (!is_string($value) || !is_account_page()) {
             return;
         }
+        if (preg_match('#^(\d+)/kalendar\.ics/?$#', $value, $match) === 1) {
+            $this->serveCalendar((int) $match[1]);
+        }
         if (preg_match('#^(\d+)/dokument/([a-f0-9-]{36})/?$#', $value, $match) !== 1) {
             return;
         }
@@ -143,6 +153,30 @@ final class WebinarsEndpoint
             $this->deny(403, __('You do not have access to this document.', 'namoudusi-webinars'));
         }
         $this->stream($document, $path);
+    }
+
+    private function serveCalendar(int $productId): void
+    {
+        if (!is_user_logged_in()) {
+            wp_safe_redirect(wc_get_page_permalink('myaccount'));
+            exit;
+        }
+        $userId = get_current_user_id();
+        $webinar = Webinar::fromProductId($productId);
+        $entitlement = $this->entitlements->find($userId, $productId);
+        if ($webinar === null || $entitlement === null || !$this->access->hasAccess($userId, $productId)) {
+            $this->deny(403, __('You do not have access to this webinar.', 'namoudusi-webinars'));
+        }
+        $ics = WebinarCalendar::forEntitlement($webinar, $entitlement);
+        if ($ics === null) {
+            $this->deny(404, __('This webinar has no date yet.', 'namoudusi-webinars'));
+        }
+        nocache_headers();
+        header('Content-Type: text/calendar; charset=utf-8');
+        header('Content-Disposition: attachment; filename="' . WebinarCalendar::fileName($webinar) . '"');
+        header('X-Robots-Tag: noindex, nofollow');
+        echo $ics; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- text/calendar body.
+        exit;
     }
 
     public function enqueueStyles(): void

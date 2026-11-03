@@ -101,6 +101,15 @@ Migrator: option `nmd_db_version`. Numbered migration classes run in order on `p
 The plugin signs `SHA256_HEX(token_key + video_id + expires)`, link valid 1 h (filter `nmd_bunny_token_ttl`).
 To verify with the first real credentials: the embed host (`iframe.mediadelivery.net`) is still current.
 
+## Zoom setup
+
+1. Zoom Marketplace → **Build App → Server-to-Server OAuth**; copy Account ID, Client ID, Client Secret into the `NAMOUDUSI_ZOOM_*` constants.
+2. Scopes: read meetings and add/update meeting registrants (plus the webinar equivalents if the Webinars add-on is used).
+3. Each meeting: **Registration: Required**, approval **automatic**. Check with `wp nmd zoom check <id>`.
+4. Product → Webinář tab → Zoom ID (+ type). Saving queues registration of all current buyers.
+
+Behaviour: registration runs in Action Scheduler (group `namoudusi-webinars`), retries after 5/15/60 min, errors in WooCommerce → Status → Logs (`namoudusi-webinars`). Customers get WooCommerce's own order e-mail plus our "access" e-mail (and a "Zoom link" e-mail when the link appears or changes later); both are under WooCommerce → Settings → E-mails.
+
 ## Configuration (`wp-config.php`)
 
 ```php
@@ -152,7 +161,7 @@ namoudusi-webinars/
 | M2 ✅ | Webinář product tab; OrderListener (grant / extend / revoke, auto-complete); manual grant in admin + `wp nmd access` CLI; Czech translation | `tests/smoke/access-flow.php` passes |
 | M3 ✅ | My Account list + detail; protected documents upload + download; product page "Go to webinar" | Buyer sees the page and downloads the PDF; a non-buyer and an anonymous visitor get 403; direct file URL is denied by Apache |
 | M4 ✅ | Bunny signed player | Video plays in the account; the copied embed URL stops working after expiry and on other domains |
-| M5 | Zoom registrants (incl. late ID, cancel), access email + .ics | Personal join URL on the page and in the email; refund cancels the registrant |
+| M5 ✅ | Zoom registrants (incl. late ID, cancel), access email + .ics | Personal join URL on the page and in the email; refund cancels the registrant |
 | M6 | Reminders 24 h / 1 h, reschedule on time change | Emails arrive in Mailpit at the right times (tested with a near-future start) |
 | M7 | Checkout consent checkbox | Checkout fails without it; consent + timestamp visible on the order |
 

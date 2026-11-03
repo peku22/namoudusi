@@ -47,6 +47,23 @@ final class EntitlementRepository
     }
 
     /**
+     * Active (not revoked, not expired) access records of a product.
+     *
+     * @return list<Entitlement>
+     */
+    public function activeForProduct(int $productId): array
+    {
+        global $wpdb;
+        $table = Tables::entitlements();
+        return $this->hydrateAll($wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM {$table} WHERE product_id = %d AND revoked_at IS NULL
+             AND (expires_at IS NULL OR expires_at > %s) ORDER BY id",
+            $productId,
+            Clock::now()->format(self::DATE)
+        )));
+    }
+
+    /**
      * @return list<Entitlement>
      */
     public function forOrder(int $orderId): array
@@ -141,6 +158,7 @@ final class EntitlementRepository
             $this->date($row->revoked_at),
             $row->zoom_registrant_id,
             $row->zoom_join_url,
+            $row->zoom_meeting_id ?? null,
         );
     }
 

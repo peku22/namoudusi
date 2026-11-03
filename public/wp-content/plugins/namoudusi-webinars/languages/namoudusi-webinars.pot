@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-03T14:40:05+01:00\n"
+"POT-Creation-Date: 2026-11-03T14:53:44+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 3.0.0-alpha-6bf617c\n"
 "X-Domain: namoudusi-webinars\n"
@@ -89,86 +89,157 @@ msgstr ""
 msgid "Go to My webinars"
 msgstr ""
 
-#: src/Account/WebinarsEndpoint.php:83
-#: src/Account/WebinarsEndpoint.php:87
-#: src/Account/WebinarsEndpoint.php:95
+#: src/Account/WebinarsEndpoint.php:90
+#: src/Account/WebinarsEndpoint.php:94
+#: src/Account/WebinarsEndpoint.php:102
 #: templates/myaccount/webinar.php:41
 msgid "My webinars"
 msgstr ""
 
-#: src/Account/WebinarsEndpoint.php:140
+#: src/Account/WebinarsEndpoint.php:150
 msgid "The document does not exist."
 msgstr ""
 
-#: src/Account/WebinarsEndpoint.php:143
+#: src/Account/WebinarsEndpoint.php:153
 msgid "You do not have access to this document."
 msgstr ""
 
-#: src/Account/WebinarsEndpoint.php:220
+#: src/Account/WebinarsEndpoint.php:168
+#: templates/myaccount/webinar.php:24
+msgid "You do not have access to this webinar."
+msgstr ""
+
+#: src/Account/WebinarsEndpoint.php:172
+msgid "This webinar has no date yet."
+msgstr ""
+
+#: src/Account/WebinarsEndpoint.php:254
 #: templates/myaccount/webinar.php:27
 msgid "Back to My webinars"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:39
-#: src/Admin/AccessAdmin.php:77
+#: src/Admin/AccessAdmin.php:40
+#: src/Admin/AccessAdmin.php:88
 msgid "Webinar access"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:54
+#: src/Admin/AccessAdmin.php:55
 msgid "No webinar access granted by this order."
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:82
-#: src/Admin/AccessAdmin.php:116
+#: src/Admin/AccessAdmin.php:65
+msgid "Zoom: registered"
+msgstr ""
+
+#: src/Admin/AccessAdmin.php:66
+msgid "Zoom: waiting for registration"
+msgstr ""
+
+#: src/Admin/AccessAdmin.php:93
+#: src/Admin/AccessAdmin.php:127
 #: src/Product/WebinarFields.php:40
 msgid "Webinar"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:83
+#: src/Admin/AccessAdmin.php:94
 msgid "Source"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:84
+#: src/Admin/AccessAdmin.php:95
 msgid "Granted"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:85
+#: src/Admin/AccessAdmin.php:96
 msgid "Expires"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:86
+#: src/Admin/AccessAdmin.php:97
 msgid "Status"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:87
+#: src/Admin/AccessAdmin.php:98
 msgid "Revoke"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:92
+#: src/Admin/AccessAdmin.php:103
 msgid "No webinar access yet."
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:113
+#: src/Admin/AccessAdmin.php:124
 msgid "Grant access"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:119
+#: src/Admin/AccessAdmin.php:130
 msgid "— Select —"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:129
+#: src/Admin/AccessAdmin.php:140
 msgid "Access until"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:133
+#: src/Admin/AccessAdmin.php:144
 msgid "Leave empty for no time limit. Replaces any existing expiry of this webinar."
 msgstr ""
 
-#: src/Plugin.php:92
+#. translators: 1: personal Zoom link, 2: webinar page URL
+#: src/Calendar/WebinarCalendar.php:26
+#, php-format
+msgid ""
+"Join: %1$s\n"
+"Webinar page: %2$s"
+msgstr ""
+
+#. translators: %s: webinar page URL
+#: src/Calendar/WebinarCalendar.php:28
+#, php-format
+msgid "Your personal Zoom link will be on the webinar page: %s"
+msgstr ""
+
+#: src/Email/AccessGrantedEmail.php:12
+msgid "Webinar access granted"
+msgstr ""
+
+#: src/Email/AccessGrantedEmail.php:13
+msgid "Sent on new webinar access (purchase or manual grant); for live webinars with the personal Zoom link and a calendar file."
+msgstr ""
+
+#: src/Email/AccessGrantedEmail.php:22
+msgid "Your access to {webinar}"
+msgstr ""
+
+#: src/Email/AccessGrantedEmail.php:27
+msgid "Your webinar is ready"
+msgstr ""
+
+#: src/Email/AccessGrantedEmail.php:32
+msgid "Thank you! You now have access to the webinar below. You will always find it in your account under My webinars."
+msgstr ""
+
+#: src/Email/ZoomLinkEmail.php:12
+msgid "Webinar Zoom link"
+msgstr ""
+
+#: src/Email/ZoomLinkEmail.php:13
+msgid "Sent when the personal Zoom link becomes available or changes after the purchase."
+msgstr ""
+
+#: src/Email/ZoomLinkEmail.php:19
+msgid "Your Zoom link for {webinar}"
+msgstr ""
+
+#: src/Email/ZoomLinkEmail.php:24
+msgid "Your Zoom link is ready"
+msgstr ""
+
+#: src/Email/ZoomLinkEmail.php:29
+msgid "Your personal link to the live webinar is ready. Please do not share it – it only works for you."
+msgstr ""
+
+#: src/Plugin.php:99
 msgid "Na mou duši – Webináře requires WooCommerce to be active."
 msgstr ""
 
-#: src/Plugin.php:107
+#: src/Plugin.php:114
 msgid "Na mou duši – Webináře: missing wp-config.php constants:"
 msgstr ""
 
@@ -246,43 +317,92 @@ msgstr ""
 msgid "Webinar (Zoom Webinars add-on)"
 msgstr ""
 
-#: src/Product/WebinarFields.php:189
+#: src/Product/WebinarFields.php:196
 msgid "Recorded webinar: the Bunny video ID is missing."
 msgstr ""
 
-#: src/Product/WebinarFields.php:193
+#: src/Product/WebinarFields.php:200
 msgid "The Bunny video ID should look like 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID)."
 msgstr ""
 
-#: src/Product/WebinarFields.php:200
+#: src/Product/WebinarFields.php:207
 msgid "Live webinar: the start date and time are missing."
 msgstr ""
 
-#: src/Product/WebinarFields.php:213
-#: templates/myaccount/webinar.php:82
+#: src/Product/WebinarFields.php:220
+#: templates/myaccount/webinar.php:86
 msgid "Documents"
 msgstr ""
 
-#: src/Product/WebinarFields.php:219
+#: src/Product/WebinarFields.php:226
 msgid "Title"
 msgstr ""
 
-#: src/Product/WebinarFields.php:220
+#: src/Product/WebinarFields.php:227
 msgid "File"
 msgstr ""
 
-#: src/Product/WebinarFields.php:221
+#: src/Product/WebinarFields.php:228
 msgid "Delete"
 msgstr ""
 
-#: src/Product/WebinarFields.php:250
+#: src/Product/WebinarFields.php:257
 msgid "Only customers with access can download these files; they are not in the media library."
 msgstr ""
 
 #. translators: 1: file name, 2: error message
-#: src/Product/WebinarFields.php:287
+#: src/Product/WebinarFields.php:294
 #, php-format
 msgid "Document \"%1$s\" was not uploaded: %2$s"
+msgstr ""
+
+#: templates/emails/plain/webinar.php:32
+#: templates/emails/webinar.php:33
+msgid "When:"
+msgstr ""
+
+#: templates/emails/plain/webinar.php:36
+#: templates/emails/webinar.php:44
+#: templates/myaccount/webinar.php:60
+msgid "Join on Zoom"
+msgstr ""
+
+#: templates/emails/plain/webinar.php:37
+#: templates/emails/webinar.php:47
+#: templates/myaccount/webinar.php:63
+msgid "This link is personal – please do not share it."
+msgstr ""
+
+#: templates/emails/plain/webinar.php:39
+#: templates/emails/webinar.php:49
+msgid "We will send you your personal Zoom link before the webinar starts. You will also find it on the webinar page."
+msgstr ""
+
+#: templates/emails/plain/webinar.php:43
+#: templates/emails/webinar.php:57
+msgid "Open the webinar page"
+msgstr ""
+
+#. translators: %s: "until <date>" or "no time limit"
+#: templates/emails/plain/webinar.php:45
+#: templates/emails/webinar.php:61
+#: templates/myaccount/webinar.php:103
+#: templates/myaccount/webinars.php:56
+#, php-format
+msgid "Access: %s"
+msgstr ""
+
+#. translators: %d: minutes
+#: templates/emails/webinar.php:37
+#: templates/myaccount/webinar.php:52
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/emails/webinar.php:52
+msgid "The attached calendar file adds the webinar to your calendar."
 msgstr ""
 
 #: templates/myaccount/webinar-video.php:19
@@ -297,10 +417,6 @@ msgstr ""
 msgid "The video cannot be played right now. Please try again later or contact us."
 msgstr ""
 
-#: templates/myaccount/webinar.php:24
-msgid "You do not have access to this webinar."
-msgstr ""
-
 #: templates/myaccount/webinar.php:30
 msgid "Buy access"
 msgstr ""
@@ -310,31 +426,12 @@ msgstr ""
 msgid "Live webinar"
 msgstr ""
 
-#. translators: %d: minutes
-#: templates/myaccount/webinar.php:52
-#, php-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/myaccount/webinar.php:60
-msgid "Join on Zoom"
+#: templates/myaccount/webinar.php:66
+msgid "Add to calendar (.ics)"
 msgstr ""
 
-#: templates/myaccount/webinar.php:63
-msgid "This link is personal – please do not share it."
-msgstr ""
-
-#: templates/myaccount/webinar.php:65
+#: templates/myaccount/webinar.php:69
 msgid "We will add your personal Zoom link here before the webinar starts and send it to you by email."
-msgstr ""
-
-#. translators: %s: "until <date>" or "no time limit"
-#: templates/myaccount/webinar.php:99
-#: templates/myaccount/webinars.php:56
-#, php-format
-msgid "Access: %s"
 msgstr ""
 
 #: templates/myaccount/webinars.php:19

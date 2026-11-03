@@ -20,6 +20,14 @@ namespace {
         public static function success(string $message): void
         {
         }
+
+        public static function warning(string|\WP_Error|\Exception $message): void
+        {
+        }
+
+        public static function log(string $message): void
+        {
+        }
     }
 }
 

@@ -61,7 +61,11 @@ $now = Clock::now();
                     </a>
                 </p>
                 <p class="nmd-webinar__hint"><?php esc_html_e('This link is personal – please do not share it.', 'namoudusi-webinars'); ?></p>
-            <?php elseif ($webinar->startsAt === null || $webinar->startsAt > $now) : ?>
+            <?php endif; ?>
+            <?php if ($webinar->startsAt !== null && $webinar->startsAt > $now) : ?>
+                <p><a href="<?php echo esc_url(WebinarsEndpoint::calendarUrl($webinar->productId)); ?>"><?php esc_html_e('Add to calendar (.ics)', 'namoudusi-webinars'); ?></a></p>
+            <?php endif; ?>
+            <?php if (($entitlement->zoomJoinUrl === null || $entitlement->zoomJoinUrl === '') && ($webinar->startsAt === null || $webinar->startsAt > $now)) : ?>
                 <p class="nmd-webinar__hint"><?php esc_html_e('We will add your personal Zoom link here before the webinar starts and send it to you by email.', 'namoudusi-webinars'); ?></p>
             <?php endif; ?>
         </section>
