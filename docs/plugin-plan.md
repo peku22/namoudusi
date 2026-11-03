@@ -138,8 +138,8 @@ namoudusi-webinars/
 
 | # | Scope | Done when |
 |---|---|---|
-| M1 | Skeleton: bootstrap, autoloader, Config, Migrator + entitlements table, HPOS/blocks compatibility, PHPCS + PHPStan + PHPUnit | Plugin activates and deactivates cleanly; table created; lint passes |
-| M2 | Webinář product tab; OrderListener (grant / extend / revoke, auto-complete); manual grant in admin | Test order via WP-CLI creates the entitlement; refund revokes it |
+| M1 ✅ | Skeleton: bootstrap, autoloader, Config, Migrator + entitlements table, HPOS/blocks compatibility, PHPCS + PHPStan + PHPUnit | Plugin activates and deactivates cleanly; table created; lint passes |
+| M2 ✅ | Webinář product tab; OrderListener (grant / extend / revoke, auto-complete); manual grant in admin + `wp nmd access` CLI; Czech translation | `tests/smoke/access-flow.php` passes |
 | M3 | My Account list + detail; protected documents upload + download | Buyer sees the page and downloads the PDF; a non-buyer and an anonymous visitor get 403; direct file URL is denied by Apache |
 | M4 | Bunny signed player | Video plays in the account; the copied embed URL stops working after expiry and on other domains |
 | M5 | Zoom registrants (incl. late ID, cancel), access email + .ics | Personal join URL on the page and in the email; refund cancels the registrant |

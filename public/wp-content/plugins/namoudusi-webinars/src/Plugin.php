@@ -5,11 +5,25 @@ declare(strict_types=1);
 namespace Namoudusi\Webinars;
 
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
+use Namoudusi\Webinars\Access\AccessService;
+use Namoudusi\Webinars\Access\EntitlementRepository;
+use Namoudusi\Webinars\Access\OrderListener;
+use Namoudusi\Webinars\Admin\AccessAdmin;
+use Namoudusi\Webinars\Cli\AccessCommand;
 use Namoudusi\Webinars\Database\Migrator;
+use Namoudusi\Webinars\Product\WebinarFields;
 
 final class Plugin
 {
     public const TEXT_DOMAIN = 'namoudusi-webinars';
+
+    private static ?AccessService $access = null;
+
+    /** Access checks for templates and other modules. */
+    public static function access(): AccessService
+    {
+        return self::$access ??= new AccessService(new EntitlementRepository());
+    }
 
     public static function declareWooCompatibility(): void
     {
@@ -31,6 +45,18 @@ final class Plugin
 
         add_action('init', [self::class, 'loadTextDomain']);
         add_action('admin_notices', [self::class, 'configNotice']);
+
+        $entitlements = new EntitlementRepository();
+        $access = self::access();
+
+        (new OrderListener($access, $entitlements))->register();
+        if (is_admin()) {
+            (new WebinarFields())->register();
+            (new AccessAdmin($access, $entitlements))->register();
+        }
+        if (defined('WP_CLI') && WP_CLI) {
+            \WP_CLI::add_command('nmd access', new AccessCommand($access, $entitlements));
+        }
     }
 
     public static function loadTextDomain(): void

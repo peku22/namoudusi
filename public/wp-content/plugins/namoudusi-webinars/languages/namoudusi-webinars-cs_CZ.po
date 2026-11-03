@@ -1,0 +1,153 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: namoudusi-webinars\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs_CZ\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Domain: namoudusi-webinars\n"
+
+msgid "Na mou duši – Webináře"
+msgstr "Na mou duši – Webináře"
+
+msgid "Recorded (Bunny Stream) and live (Zoom) webinars sold via WooCommerce, access in My Account."
+msgstr "Nahrané (Bunny Stream) a živé (Zoom) webináře prodávané přes WooCommerce, přístup v sekci Můj účet."
+
+msgid "Na mou duši"
+msgstr "Na mou duši"
+
+msgid "no time limit"
+msgstr "bez časového omezení"
+
+msgid "until %s"
+msgstr "do %s"
+
+msgid "Active"
+msgstr "Aktivní"
+
+msgid "Expired"
+msgstr "Vypršel"
+
+msgid "Revoked"
+msgstr "Odebrán"
+
+msgid "Manual"
+msgstr "Ručně"
+
+msgid "Order"
+msgstr "Objednávka"
+
+msgid "Webinar \"%s\": no customer account on the order, access not granted."
+msgstr "Webinář „%s“: objednávka nemá zákaznický účet, přístup nebyl udělen."
+
+msgid "Access to webinar \"%1$s\" granted: %2$s."
+msgstr "Přístup k webináři „%1$s“ udělen: %2$s."
+
+msgid "Access to webinar \"%s\" revoked."
+msgstr "Přístup k webináři „%s“ odebrán."
+
+msgid "Webinar access"
+msgstr "Přístupy k webinářům"
+
+msgid "No webinar access granted by this order."
+msgstr "Tato objednávka neudělila přístup k žádnému webináři."
+
+msgid "Webinar"
+msgstr "Webinář"
+
+msgid "Source"
+msgstr "Zdroj"
+
+msgid "Granted"
+msgstr "Uděleno"
+
+msgid "Expires"
+msgstr "Platnost do"
+
+msgid "Status"
+msgstr "Stav"
+
+msgid "Revoke"
+msgstr "Odebrat"
+
+msgid "No webinar access yet."
+msgstr "Zatím žádné přístupy k webinářům."
+
+msgid "Grant access"
+msgstr "Udělit přístup"
+
+msgid "— Select —"
+msgstr "— Vyberte —"
+
+msgid "Access until"
+msgstr "Přístup do"
+
+msgid "Leave empty for no time limit. Replaces any existing expiry of this webinar."
+msgstr "Prázdné = bez časového omezení. Nahradí dosavadní platnost přístupu k tomuto webináři."
+
+msgid "Na mou duši – Webináře requires WooCommerce to be active."
+msgstr "Na mou duši – Webináře vyžaduje aktivní WooCommerce."
+
+msgid "Na mou duši – Webináře: missing wp-config.php constants:"
+msgstr "Na mou duši – Webináře: ve wp-config.php chybí konstanty:"
+
+msgid "Webinar type"
+msgstr "Typ webináře"
+
+msgid "— Not a webinar —"
+msgstr "— Není webinář —"
+
+msgid "Recorded"
+msgstr "Nahraný"
+
+msgid "Live (Zoom)"
+msgstr "Živý (Zoom)"
+
+msgid "Webinar products are always virtual and sold one per customer."
+msgstr "Webináře jsou vždy virtuální produkty a každý zákazník je může koupit jen jednou."
+
+msgid "Access (days)"
+msgstr "Přístup (dny)"
+
+msgid "No time limit"
+msgstr "Bez časového omezení"
+
+msgid "Empty = no time limit. Live: counted from the event start; recorded: from the purchase."
+msgstr "Prázdné = bez časového omezení. Živý: počítá se od začátku akce; nahraný: od nákupu."
+
+msgid "Bunny video ID"
+msgstr "ID videa v Bunny"
+
+msgid "Required for recorded webinars. For live webinars, add the recording here after the event."
+msgstr "Povinné u nahraných webinářů. U živých sem po akci doplňte záznam."
+
+msgid "Start"
+msgstr "Začátek"
+
+msgid "Time in %s."
+msgstr "Čas v zóně %s."
+
+msgid "Duration (minutes)"
+msgstr "Délka (minuty)"
+
+msgid "Zoom ID"
+msgstr "Zoom ID"
+
+msgid "Can be added later; buyers are then registered automatically. Registration must be enabled in Zoom."
+msgstr "Lze doplnit později; kupující se pak zaregistrují automaticky. V Zoomu musí být zapnutá registrace."
+
+msgid "Zoom type"
+msgstr "Typ v Zoomu"
+
+msgid "Meeting"
+msgstr "Meeting"
+
+msgid "Webinar (Zoom Webinars add-on)"
+msgstr "Webinar (doplněk Zoom Webinars)"
+
+msgid "Recorded webinar: the Bunny video ID is missing."
+msgstr "Nahraný webinář: chybí ID videa v Bunny."
+
+msgid "Live webinar: the start date and time are missing."
+msgstr "Živý webinář: chybí datum a čas začátku."

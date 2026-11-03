@@ -8,7 +8,11 @@ parameters:
         - uninstall.php
         - src
         - tests
+    excludePaths:
+        - tests/stubs
+        - tests/smoke
     scanFiles:
         - vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
+        - tests/stubs/wp-cli.php
     bootstrapFiles:
         - tests/phpstan-bootstrap.php
