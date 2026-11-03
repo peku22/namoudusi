@@ -17,6 +17,8 @@ use Namoudusi\Webinars\Database\Migrator;
 use Namoudusi\Webinars\Documents\DocumentStorage;
 use Namoudusi\Webinars\Email\Emails;
 use Namoudusi\Webinars\Product\WebinarFields;
+use Namoudusi\Webinars\Schedule\Reminders;
+use Namoudusi\Webinars\Schedule\StartChange;
 use Namoudusi\Webinars\Video\VideoPlayer;
 use Namoudusi\Webinars\Zoom\ZoomRegistrar;
 
@@ -63,6 +65,8 @@ final class Plugin
         $zoomRegistrar = new ZoomRegistrar($entitlements);
         $zoomRegistrar->register();
         (new Emails())->register();
+        (new Reminders($entitlements))->register();
+        (new StartChange($entitlements))->register();
         add_action('before_delete_post', [self::class, 'deleteProductDocuments'], 10, 2);
         if (is_admin()) {
             (new WebinarFields())->register();

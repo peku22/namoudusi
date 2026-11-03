@@ -6,18 +6,22 @@ namespace Namoudusi\Webinars\Email;
 
 use Namoudusi\Webinars\Access\Entitlement;
 use Namoudusi\Webinars\Product\Webinar;
+use Namoudusi\Webinars\Schedule\Reminders;
 use Namoudusi\Webinars\Zoom\ZoomRegistrar;
 
 /**
  * Decides which webinar e-mail goes out when:
  * - new access, no Zoom registration needed → access e-mail right away;
  * - new access to a live webinar with Zoom → access e-mail once the personal link exists (or registration gave up);
- * - Zoom link added/changed later → link e-mail.
+ * - Zoom link added/changed later → link e-mail;
+ * - 24 h / 1 h before a live webinar → reminder; start time changed → schedule-changed e-mail (see Schedule\*).
  */
 final class Emails
 {
     public const ACCESS_GRANTED = 'nmd_access_granted';
     public const ZOOM_LINK = 'nmd_zoom_link';
+    public const REMINDER = 'nmd_webinar_reminder';
+    public const RESCHEDULED = 'nmd_webinar_rescheduled';
 
     public function register(): void
     {
@@ -34,6 +38,8 @@ final class Emails
     {
         $emails[self::ACCESS_GRANTED] = new AccessGrantedEmail();
         $emails[self::ZOOM_LINK] = new ZoomLinkEmail();
+        $emails[self::REMINDER] = new ReminderEmail();
+        $emails[self::RESCHEDULED] = new ScheduleChangedEmail();
         return $emails;
     }
 
@@ -58,5 +64,19 @@ final class Emails
     {
         $email = WC()->mailer()->get_emails()[$key] ?? null;
         return $email instanceof WebinarEmail && $email->trigger($entitlement);
+    }
+
+    /**
+     * @param string $kind Reminders::KIND_*
+     */
+    public static function sendNotification(string $kind, Entitlement $entitlement): bool
+    {
+        $emails = WC()->mailer()->get_emails();
+        if ($kind === Reminders::KIND_CHANGED) {
+            $email = $emails[self::RESCHEDULED] ?? null;
+            return $email instanceof WebinarEmail && $email->trigger($entitlement);
+        }
+        $email = $emails[self::REMINDER] ?? null;
+        return $email instanceof ReminderEmail && $email->triggerReminder($kind, $entitlement);
     }
 }

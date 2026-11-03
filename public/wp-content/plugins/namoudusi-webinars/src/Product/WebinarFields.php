@@ -101,7 +101,7 @@ final class WebinarFields
             'desc_tip' => true,
             'description' => sprintf(
                 /* translators: %s: timezone name */
-                __('Time in %s.', 'namoudusi-webinars'),
+                __('Time in %s. Buyers get reminders 24 h and 1 h before; when you change the time, they get an e-mail.', 'namoudusi-webinars'),
                 wp_timezone_string()
             ),
         ]);
@@ -187,6 +187,12 @@ final class WebinarFields
         if ($type === WebinarType::Live && $zoomChanged) {
             // Buyers get (re)registered by an async job once the product is saved.
             do_action('nmd_webinar_zoom_changed', $product->get_id());
+        }
+
+        $previousStart = $previous?->isLive() ? $previous->startsAt : null;
+        if ($type === WebinarType::Live && $product->get_id() > 0 && $startsAt !== null && $startsAt != $previousStart) {
+            // Access expiries (and buyer e-mails, if a time was set before) follow in an async job after the save.
+            do_action('nmd_webinar_start_changed', $product->get_id(), $previousStart?->getTimestamp() ?? 0);
         }
 
         $this->saveDocuments($product);

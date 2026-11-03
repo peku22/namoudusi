@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Namoudusi\Webinars\Email;
 
+use Namoudusi\Webinars\Access\AccessFormatter;
 use Namoudusi\Webinars\Access\Entitlement;
 use Namoudusi\Webinars\Account\WebinarsEndpoint;
 use Namoudusi\Webinars\Calendar\WebinarCalendar;
@@ -25,7 +26,7 @@ abstract class WebinarEmail extends \WC_Email
         $this->template_base = WebinarsEndpoint::templateDir();
         $this->template_html = 'emails/webinar.php';
         $this->template_plain = 'emails/plain/webinar.php';
-        $this->placeholders = ['{webinar}' => ''];
+        $this->placeholders = ['{webinar}' => '', '{start}' => ''];
         parent::__construct();
     }
 
@@ -44,6 +45,7 @@ abstract class WebinarEmail extends \WC_Email
             $this->object = $user;
             $this->recipient = $user->user_email;
             $this->placeholders['{webinar}'] = $this->webinar->name;
+            $this->placeholders['{start}'] = $this->webinar->startsAt !== null ? AccessFormatter::date($this->webinar->startsAt) : '';
 
             if ($this->is_enabled() && $this->get_recipient()) {
                 $this->icsPath = $this->writeIcs();

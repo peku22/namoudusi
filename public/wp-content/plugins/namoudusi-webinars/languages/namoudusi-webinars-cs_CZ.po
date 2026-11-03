@@ -1,309 +1,507 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: namoudusi-webinars\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-03T17:42:50+01:00\n"
+"PO-Revision-Date: 2026-11-03T16:42:50+00:00\n"
 "Language: cs_CZ\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Domain: namoudusi-webinars\n"
 
+#. Plugin Name of the plugin
+#: namoudusi-webinars.php:4
 msgid "Na mou duši – Webináře"
 msgstr "Na mou duši – Webináře"
 
+#. Description of the plugin
+#: namoudusi-webinars.php:5
 msgid "Recorded (Bunny Stream) and live (Zoom) webinars sold via WooCommerce, access in My Account."
 msgstr "Nahrané (Bunny Stream) a živé (Zoom) webináře prodávané přes WooCommerce, přístup v sekci Můj účet."
 
+#. Author of the plugin
+#: namoudusi-webinars.php:10
 msgid "Na mou duši"
 msgstr "Na mou duši"
 
+#: src/Access/AccessFormatter.php:23
 msgid "no time limit"
 msgstr "bez časového omezení"
 
+#. translators: %s: date and time
+#: src/Access/AccessFormatter.php:26
+#, php-format
 msgid "until %s"
 msgstr "do %s"
 
+#: src/Access/AccessFormatter.php:32
 msgid "Active"
 msgstr "Aktivní"
 
+#: src/Access/AccessFormatter.php:33
 msgid "Expired"
 msgstr "Vypršel"
 
+#: src/Access/AccessFormatter.php:34
 msgid "Revoked"
 msgstr "Odebrán"
 
+#: src/Access/AccessFormatter.php:41
 msgid "Manual"
 msgstr "Ručně"
 
+#: src/Access/AccessFormatter.php:42
 msgid "Order"
 msgstr "Objednávka"
 
+#. translators: %s: product name
+#: src/Access/OrderListener.php:72
+#, php-format
 msgid "Webinar \"%s\": no customer account on the order, access not granted."
 msgstr "Webinář „%s“: objednávka nemá zákaznický účet, přístup nebyl udělen."
 
+#. translators: 1: product name, 2: expiry date or "no time limit"
+#: src/Access/OrderListener.php:93
+#, php-format
 msgid "Access to webinar \"%1$s\" granted: %2$s."
 msgstr "Přístup k webináři „%1$s“ udělen: %2$s."
 
+#. translators: %s: product name
+#: src/Access/OrderListener.php:155
+#, php-format
 msgid "Access to webinar \"%s\" revoked."
 msgstr "Přístup k webináři „%s“ odebrán."
 
-msgid "Webinar access"
-msgstr "Přístupy k webinářům"
-
-msgid "No webinar access granted by this order."
-msgstr "Tato objednávka neudělila přístup k žádnému webináři."
-
-msgid "Webinar"
-msgstr "Webinář"
-
-msgid "Source"
-msgstr "Zdroj"
-
-msgid "Granted"
-msgstr "Uděleno"
-
-msgid "Expires"
-msgstr "Platnost do"
-
-msgid "Status"
-msgstr "Stav"
-
-msgid "Revoke"
-msgstr "Odebrat"
-
-msgid "No webinar access yet."
-msgstr "Zatím žádné přístupy k webinářům."
-
-msgid "Grant access"
-msgstr "Udělit přístup"
-
-msgid "— Select —"
-msgstr "— Vyberte —"
-
-msgid "Access until"
-msgstr "Přístup do"
-
-msgid "Leave empty for no time limit. Replaces any existing expiry of this webinar."
-msgstr "Prázdné = bez časového omezení. Nahradí dosavadní platnost přístupu k tomuto webináři."
-
-msgid "Na mou duši – Webináře requires WooCommerce to be active."
-msgstr "Na mou duši – Webináře vyžaduje aktivní WooCommerce."
-
-msgid "Na mou duši – Webináře: missing wp-config.php constants:"
-msgstr "Na mou duši – Webináře: ve wp-config.php chybí konstanty:"
-
-msgid "Webinar type"
-msgstr "Typ webináře"
-
-msgid "— Not a webinar —"
-msgstr "— Není webinář —"
-
-msgid "Recorded"
-msgstr "Nahraný"
-
-msgid "Live (Zoom)"
-msgstr "Živý (Zoom)"
-
-msgid "Webinar products are always virtual and sold one per customer."
-msgstr "Webináře jsou vždy virtuální produkty a každý zákazník je může koupit jen jednou."
-
-msgid "Access (days)"
-msgstr "Přístup (dny)"
-
-msgid "No time limit"
-msgstr "Bez časového omezení"
-
-msgid "Empty = no time limit. Live: counted from the event start; recorded: from the purchase."
-msgstr "Prázdné = bez časového omezení. Živý: počítá se od začátku akce; nahraný: od nákupu."
-
-msgid "Bunny video ID"
-msgstr "ID videa v Bunny"
-
-msgid "Required for recorded webinars. For live webinars, add the recording here after the event."
-msgstr "Povinné u nahraných webinářů. U živých sem po akci doplňte záznam."
-
-msgid "Start"
-msgstr "Začátek"
-
-msgid "Time in %s."
-msgstr "Čas v zóně %s."
-
-msgid "Duration (minutes)"
-msgstr "Délka (minuty)"
-
-msgid "Zoom ID"
-msgstr "Zoom ID"
-
-msgid "Can be added later; buyers are then registered automatically. Registration must be enabled in Zoom."
-msgstr "Lze doplnit později; kupující se pak zaregistrují automaticky. V Zoomu musí být zapnutá registrace."
-
-msgid "Zoom type"
-msgstr "Typ v Zoomu"
-
-msgid "Meeting"
-msgstr "Meeting"
-
-msgid "Webinar (Zoom Webinars add-on)"
-msgstr "Webinar (doplněk Zoom Webinars)"
-
-msgid "Recorded webinar: the Bunny video ID is missing."
-msgstr "Nahraný webinář: chybí ID videa v Bunny."
-
-msgid "Live webinar: the start date and time are missing."
-msgstr "Živý webinář: chybí datum a čas začátku."
-
+#: src/Account/ProductPage.php:42
 msgid "You already have access to this webinar."
 msgstr "K tomuto webináři už máte přístup."
 
+#: src/Account/ProductPage.php:44
 msgid "Go to webinar"
 msgstr "Přejít na webinář"
 
+#: src/Account/ProductPage.php:59
 msgid "Go to My webinars"
 msgstr "Přejít na Moje webináře"
 
+#: src/Account/WebinarsEndpoint.php:90
+#: src/Account/WebinarsEndpoint.php:94
+#: src/Account/WebinarsEndpoint.php:102
+#: templates/myaccount/webinar.php:41
 msgid "My webinars"
 msgstr "Moje webináře"
 
+#: src/Account/WebinarsEndpoint.php:150
 msgid "The document does not exist."
 msgstr "Dokument neexistuje."
 
+#: src/Account/WebinarsEndpoint.php:153
 msgid "You do not have access to this document."
 msgstr "K tomuto dokumentu nemáte přístup."
 
-msgid "Back to My webinars"
-msgstr "Zpět na Moje webináře"
-
-msgid "Documents"
-msgstr "Dokumenty"
-
-msgid "Title"
-msgstr "Název"
-
-msgid "File"
-msgstr "Soubor"
-
-msgid "Delete"
-msgstr "Smazat"
-
-msgid "Only customers with access can download these files; they are not in the media library."
-msgstr "Soubory si mohou stáhnout jen zákazníci s přístupem; nejsou v knihovně médií."
-
-msgid "Document \"%1$s\" was not uploaded: %2$s"
-msgstr "Dokument „%1$s“ se nepodařilo nahrát: %2$s"
-
+#: src/Account/WebinarsEndpoint.php:168
+#: templates/myaccount/webinar.php:24
 msgid "You do not have access to this webinar."
 msgstr "K tomuto webináři nemáte přístup."
 
-msgid "Buy access"
-msgstr "Koupit přístup"
+#: src/Account/WebinarsEndpoint.php:172
+msgid "This webinar has no date yet."
+msgstr "Tento webinář zatím nemá termín."
 
-msgid "Live webinar"
-msgstr "Živý webinář"
+#: src/Account/WebinarsEndpoint.php:254
+#: templates/myaccount/webinar.php:27
+msgid "Back to My webinars"
+msgstr "Zpět na Moje webináře"
 
+#: src/Admin/AccessAdmin.php:40
+#: src/Admin/AccessAdmin.php:88
+msgid "Webinar access"
+msgstr "Přístupy k webinářům"
+
+#: src/Admin/AccessAdmin.php:55
+msgid "No webinar access granted by this order."
+msgstr "Tato objednávka neudělila přístup k žádnému webináři."
+
+#: src/Admin/AccessAdmin.php:65
+msgid "Zoom: registered"
+msgstr "Zoom: zaregistrován"
+
+#: src/Admin/AccessAdmin.php:66
+msgid "Zoom: waiting for registration"
+msgstr "Zoom: čeká na registraci"
+
+#: src/Admin/AccessAdmin.php:93
+#: src/Admin/AccessAdmin.php:127
+#: src/Product/WebinarFields.php:40
+msgid "Webinar"
+msgstr "Webinář"
+
+#: src/Admin/AccessAdmin.php:94
+msgid "Source"
+msgstr "Zdroj"
+
+#: src/Admin/AccessAdmin.php:95
+msgid "Granted"
+msgstr "Uděleno"
+
+#: src/Admin/AccessAdmin.php:96
+msgid "Expires"
+msgstr "Platnost do"
+
+#: src/Admin/AccessAdmin.php:97
+msgid "Status"
+msgstr "Stav"
+
+#: src/Admin/AccessAdmin.php:98
+msgid "Revoke"
+msgstr "Odebrat"
+
+#: src/Admin/AccessAdmin.php:103
+msgid "No webinar access yet."
+msgstr "Zatím žádné přístupy k webinářům."
+
+#: src/Admin/AccessAdmin.php:124
+msgid "Grant access"
+msgstr "Udělit přístup"
+
+#: src/Admin/AccessAdmin.php:130
+msgid "— Select —"
+msgstr "— Vyberte —"
+
+#: src/Admin/AccessAdmin.php:140
+msgid "Access until"
+msgstr "Přístup do"
+
+#: src/Admin/AccessAdmin.php:144
+msgid "Leave empty for no time limit. Replaces any existing expiry of this webinar."
+msgstr "Prázdné = bez časového omezení. Nahradí dosavadní platnost přístupu k tomuto webináři."
+
+#. translators: 1: personal Zoom link, 2: webinar page URL
+#: src/Calendar/WebinarCalendar.php:26
+#, php-format
+msgid ""
+"Join: %1$s\n"
+"Webinar page: %2$s"
+msgstr ""
+"Připojit se: %1$s\n"
+"Stránka webináře: %2$s"
+
+#. translators: %s: webinar page URL
+#: src/Calendar/WebinarCalendar.php:28
+#, php-format
+msgid "Your personal Zoom link will be on the webinar page: %s"
+msgstr "Váš osobní odkaz na Zoom najdete na stránce webináře: %s"
+
+#: src/Email/AccessGrantedEmail.php:12
+msgid "Webinar access granted"
+msgstr "Udělený přístup k webináři"
+
+#: src/Email/AccessGrantedEmail.php:13
+msgid "Sent on new webinar access (purchase or manual grant); for live webinars with the personal Zoom link and a calendar file."
+msgstr "Odesílá se při novém přístupu k webináři (nákup nebo ruční udělení); u živých webinářů s osobním odkazem na Zoom a souborem do kalendáře."
+
+#: src/Email/AccessGrantedEmail.php:22
+msgid "Your access to {webinar}"
+msgstr "Váš přístup k webináři {webinar}"
+
+#: src/Email/AccessGrantedEmail.php:27
+msgid "Your webinar is ready"
+msgstr "Váš webinář je připraven"
+
+#: src/Email/AccessGrantedEmail.php:32
+msgid "Thank you! You now have access to the webinar below. You will always find it in your account under My webinars."
+msgstr "Děkujeme! Nyní máte přístup k webináři níže. Kdykoli ho najdete ve svém účtu v sekci Moje webináře."
+
+#: src/Email/ReminderEmail.php:17
+msgid "Live webinar reminder"
+msgstr "Připomínka živého webináře"
+
+#: src/Email/ReminderEmail.php:18
+msgid "Sent to buyers of a live webinar 24 hours and 1 hour before it starts."
+msgstr "Odesílá se kupujícím živého webináře 24 hodin a 1 hodinu před začátkem."
+
+#: src/Email/ReminderEmail.php:30
+msgid "Reminder: {webinar} starts {start}"
+msgstr "Připomínka: {webinar} – {start}"
+
+#: src/Email/ReminderEmail.php:35
+msgid "Your webinar starts soon"
+msgstr "Váš webinář brzy začíná"
+
+#: src/Email/ReminderEmail.php:41
+msgid "Your webinar starts in an hour. Join with your personal link below – we look forward to seeing you."
+msgstr "Váš webinář začíná za hodinu. Připojte se svým osobním odkazem níže – těšíme se na vás."
+
+#: src/Email/ReminderEmail.php:42
+msgid "Your webinar starts tomorrow. Here is everything you need to join."
+msgstr "Váš webinář začíná zítra. Tady je vše, co k připojení potřebujete."
+
+#: src/Email/ScheduleChangedEmail.php:12
+msgid "Live webinar time changed"
+msgstr "Změna termínu živého webináře"
+
+#: src/Email/ScheduleChangedEmail.php:13
+msgid "Sent to buyers of a live webinar when its start time changes, with an updated calendar file."
+msgstr "Odesílá se kupujícím živého webináře, když se změní čas začátku; obsahuje aktualizovaný soubor do kalendáře."
+
+#: src/Email/ScheduleChangedEmail.php:22
+msgid "New date: {webinar} – {start}"
+msgstr "Nový termín: {webinar} – {start}"
+
+#: src/Email/ScheduleChangedEmail.php:27
+msgid "The webinar time has changed"
+msgstr "Termín webináře se změnil"
+
+#: src/Email/ScheduleChangedEmail.php:32
+msgid "The live webinar you bought has a new date and time. The attached calendar file updates the event in your calendar."
+msgstr "Živý webinář, který jste si koupili, má nový termín. Přiložený soubor aktualizuje událost ve vašem kalendáři."
+
+#: src/Email/ZoomLinkEmail.php:12
+msgid "Webinar Zoom link"
+msgstr "Odkaz na Zoom pro webinář"
+
+#: src/Email/ZoomLinkEmail.php:13
+msgid "Sent when the personal Zoom link becomes available or changes after the purchase."
+msgstr "Odesílá se, když je osobní odkaz na Zoom po nákupu k dispozici nebo se změní."
+
+#: src/Email/ZoomLinkEmail.php:19
+msgid "Your Zoom link for {webinar}"
+msgstr "Váš odkaz na Zoom: {webinar}"
+
+#: src/Email/ZoomLinkEmail.php:24
+msgid "Your Zoom link is ready"
+msgstr "Váš odkaz na Zoom je připraven"
+
+#: src/Email/ZoomLinkEmail.php:29
+msgid "Your personal link to the live webinar is ready. Please do not share it – it only works for you."
+msgstr "Váš osobní odkaz na živý webinář je připraven. Prosíme, nesdílejte ho – funguje jen pro vás."
+
+#: src/Plugin.php:103
+msgid "Na mou duši – Webináře requires WooCommerce to be active."
+msgstr "Na mou duši – Webináře vyžaduje aktivní WooCommerce."
+
+#: src/Plugin.php:118
+msgid "Na mou duši – Webináře: missing wp-config.php constants:"
+msgstr "Na mou duši – Webináře: ve wp-config.php chybí konstanty:"
+
+#: src/Product/WebinarFields.php:59
+msgid "Webinar type"
+msgstr "Typ webináře"
+
+#: src/Product/WebinarFields.php:62
+msgid "— Not a webinar —"
+msgstr "— Není webinář —"
+
+#: src/Product/WebinarFields.php:63
+msgid "Recorded"
+msgstr "Nahraný"
+
+#: src/Product/WebinarFields.php:64
+msgid "Live (Zoom)"
+msgstr "Živý (Zoom)"
+
+#: src/Product/WebinarFields.php:67
+msgid "Webinar products are always virtual and sold one per customer."
+msgstr "Webináře jsou vždy virtuální produkty a každý zákazník je může koupit jen jednou."
+
+#: src/Product/WebinarFields.php:71
+msgid "Access (days)"
+msgstr "Přístup (dny)"
+
+#: src/Product/WebinarFields.php:74
+msgid "No time limit"
+msgstr "Bez časového omezení"
+
+#: src/Product/WebinarFields.php:77
+msgid "Empty = no time limit. Live: counted from the event start; recorded: from the purchase."
+msgstr "Prázdné = bez časového omezení. Živý: počítá se od začátku akce; nahraný: od nákupu."
+
+#: src/Product/WebinarFields.php:84
+msgid "Bunny video ID"
+msgstr "ID videa v Bunny"
+
+#: src/Product/WebinarFields.php:88
+msgid "Required for recorded webinars. For live webinars, add the recording here after the event."
+msgstr "Povinné u nahraných webinářů. U živých sem po akci doplňte záznam."
+
+#: src/Product/WebinarFields.php:98
+msgid "Start"
+msgstr "Začátek"
+
+#. translators: %s: timezone name
+#: src/Product/WebinarFields.php:104
+#, php-format
+msgid "Time in %s. Buyers get reminders 24 h and 1 h before; when you change the time, they get an e-mail."
+msgstr "Čas v zóně %s. Kupující dostanou připomínku 24 h a 1 h předem; při změně času jim přijde e-mail."
+
+#: src/Product/WebinarFields.php:110
+msgid "Duration (minutes)"
+msgstr "Délka (minuty)"
+
+#: src/Product/WebinarFields.php:117
+msgid "Zoom ID"
+msgstr "Zoom ID"
+
+#: src/Product/WebinarFields.php:121
+msgid "Can be added later; buyers are then registered automatically. Registration must be enabled in Zoom."
+msgstr "Lze doplnit později; kupující se pak zaregistrují automaticky. V Zoomu musí být zapnutá registrace."
+
+#: src/Product/WebinarFields.php:128
+msgid "Zoom type"
+msgstr "Typ v Zoomu"
+
+#: src/Product/WebinarFields.php:131
+msgid "Meeting"
+msgstr "Meeting"
+
+#: src/Product/WebinarFields.php:132
+msgid "Webinar (Zoom Webinars add-on)"
+msgstr "Webinar (doplněk Zoom Webinars)"
+
+#: src/Product/WebinarFields.php:202
+msgid "Recorded webinar: the Bunny video ID is missing."
+msgstr "Nahraný webinář: chybí ID videa v Bunny."
+
+#: src/Product/WebinarFields.php:206
+msgid "The Bunny video ID should look like 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID)."
+msgstr "ID videa v Bunny má tvar 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID)."
+
+#: src/Product/WebinarFields.php:213
+msgid "Live webinar: the start date and time are missing."
+msgstr "Živý webinář: chybí datum a čas začátku."
+
+#: src/Product/WebinarFields.php:226
+#: templates/myaccount/webinar.php:86
+msgid "Documents"
+msgstr "Dokumenty"
+
+#: src/Product/WebinarFields.php:232
+msgid "Title"
+msgstr "Název"
+
+#: src/Product/WebinarFields.php:233
+msgid "File"
+msgstr "Soubor"
+
+#: src/Product/WebinarFields.php:234
+msgid "Delete"
+msgstr "Smazat"
+
+#: src/Product/WebinarFields.php:263
+msgid "Only customers with access can download these files; they are not in the media library."
+msgstr "Soubory si mohou stáhnout jen zákazníci s přístupem; nejsou v knihovně médií."
+
+#. translators: 1: file name, 2: error message
+#: src/Product/WebinarFields.php:300
+#, php-format
+msgid "Document \"%1$s\" was not uploaded: %2$s"
+msgstr "Dokument „%1$s“ se nepodařilo nahrát: %2$s"
+
+#: templates/emails/plain/webinar.php:32
+#: templates/emails/webinar.php:33
+msgid "When:"
+msgstr "Kdy:"
+
+#: templates/emails/plain/webinar.php:36
+#: templates/emails/webinar.php:44
+#: templates/myaccount/webinar.php:60
 msgid "Join on Zoom"
 msgstr "Připojit se přes Zoom"
 
+#: templates/emails/plain/webinar.php:37
+#: templates/emails/webinar.php:47
+#: templates/myaccount/webinar.php:63
 msgid "This link is personal – please do not share it."
 msgstr "Odkaz je osobní – prosíme, nesdílejte ho."
 
-msgid "We will add your personal Zoom link here before the webinar starts and send it to you by email."
-msgstr "Osobní odkaz na Zoom sem doplníme před začátkem webináře a pošleme vám ho e-mailem."
+#: templates/emails/plain/webinar.php:39
+#: templates/emails/webinar.php:49
+msgid "We will send you your personal Zoom link before the webinar starts. You will also find it on the webinar page."
+msgstr "Osobní odkaz na Zoom vám pošleme před začátkem webináře. Najdete ho také na stránce webináře."
 
+#: templates/emails/plain/webinar.php:43
+#: templates/emails/webinar.php:57
+msgid "Open the webinar page"
+msgstr "Otevřít stránku webináře"
+
+#. translators: %s: "until <date>" or "no time limit"
+#: templates/emails/plain/webinar.php:45
+#: templates/emails/webinar.php:61
+#: templates/myaccount/webinar.php:103
+#: templates/myaccount/webinars.php:56
+#, php-format
 msgid "Access: %s"
 msgstr "Přístup: %s"
 
-msgid "You have no webinars yet."
-msgstr "Zatím nemáte žádné webináře."
-
-msgid "Browse webinars"
-msgstr "Prohlédnout webináře"
-
-msgid "Live webinar · %s"
-msgstr "Živý webinář · %s"
-
-msgid "Recorded webinar"
-msgstr "Nahraný webinář"
-
-msgid "Access has expired."
-msgstr "Přístup vypršel."
-
-msgid "Buy again"
-msgstr "Koupit znovu"
-
+#. translators: %d: minutes
+#: templates/emails/webinar.php:37
+#: templates/myaccount/webinar.php:52
+#, php-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuta"
 msgstr[1] "%d minuty"
 msgstr[2] "%d minut"
 
-msgid "Recording"
-msgstr "Záznam"
-
-msgid "Video"
-msgstr "Video"
-
-msgid "The video cannot be played right now. Please try again later or contact us."
-msgstr "Video teď nelze přehrát. Zkuste to prosím později, nebo nás kontaktujte."
-
-msgid "The Bunny video ID should look like 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID)."
-msgstr "ID videa v Bunny má tvar 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID)."
-
-msgid "This webinar has no date yet."
-msgstr "Tento webinář zatím nemá termín."
-
-msgid "Zoom: registered"
-msgstr "Zoom: zaregistrován"
-
-msgid "Zoom: waiting for registration"
-msgstr "Zoom: čeká na registraci"
-
-msgid "Your personal Zoom link will be on the webinar page: %s"
-msgstr "Váš osobní odkaz na Zoom najdete na stránce webináře: %s"
-
-msgid "Sent on new webinar access (purchase or manual grant); for live webinars with the personal Zoom link and a calendar file."
-msgstr "Odesílá se při novém přístupu k webináři (nákup nebo ruční udělení); u živých webinářů s osobním odkazem na Zoom a souborem do kalendáře."
-
-msgid "Webinar access granted"
-msgstr "Udělený přístup k webináři"
-
-msgid "Your access to {webinar}"
-msgstr "Váš přístup k webináři {webinar}"
-
-msgid "Your webinar is ready"
-msgstr "Váš webinář je připraven"
-
-msgid "Thank you! You now have access to the webinar below. You will always find it in your account under My webinars."
-msgstr "Děkujeme! Nyní máte přístup k webináři níže. Kdykoli ho najdete ve svém účtu v sekci Moje webináře."
-
-msgid "Webinar Zoom link"
-msgstr "Odkaz na Zoom pro webinář"
-
-msgid "Sent when the personal Zoom link becomes available or changes after the purchase."
-msgstr "Odesílá se, když je osobní odkaz na Zoom po nákupu k dispozici nebo se změní."
-
-msgid "Your Zoom link for {webinar}"
-msgstr "Váš odkaz na Zoom: {webinar}"
-
-msgid "Your Zoom link is ready"
-msgstr "Váš odkaz na Zoom je připraven"
-
-msgid "Your personal link to the live webinar is ready. Please do not share it – it only works for you."
-msgstr "Váš osobní odkaz na živý webinář je připraven. Prosíme, nesdílejte ho – funguje jen pro vás."
-
-msgid "When:"
-msgstr "Kdy:"
-
-msgid "We will send you your personal Zoom link before the webinar starts. You will also find it on the webinar page."
-msgstr "Osobní odkaz na Zoom vám pošleme před začátkem webináře. Najdete ho také na stránce webináře."
-
-msgid "Open the webinar page"
-msgstr "Otevřít stránku webináře"
-
+#: templates/emails/webinar.php:52
 msgid "The attached calendar file adds the webinar to your calendar."
 msgstr "Přiložený soubor přidá webinář do vašeho kalendáře."
 
+#: templates/myaccount/webinar-video.php:19
+msgid "Recording"
+msgstr "Záznam"
+
+#: templates/myaccount/webinar-video.php:19
+msgid "Video"
+msgstr "Video"
+
+#: templates/myaccount/webinar-video.php:44
+msgid "The video cannot be played right now. Please try again later or contact us."
+msgstr "Video teď nelze přehrát. Zkuste to prosím později, nebo nás kontaktujte."
+
+#: templates/myaccount/webinar.php:30
+msgid "Buy access"
+msgstr "Koupit přístup"
+
+#: templates/myaccount/webinar.php:45
+#: templates/myaccount/webinars.php:45
+msgid "Live webinar"
+msgstr "Živý webinář"
+
+#: templates/myaccount/webinar.php:66
 msgid "Add to calendar (.ics)"
 msgstr "Přidat do kalendáře (.ics)"
 
-msgid "Join: %1$s\nWebinar page: %2$s"
-msgstr "Připojit se: %1$s\nStránka webináře: %2$s"
+#: templates/myaccount/webinar.php:69
+msgid "We will add your personal Zoom link here before the webinar starts and send it to you by email."
+msgstr "Osobní odkaz na Zoom sem doplníme před začátkem webináře a pošleme vám ho e-mailem."
+
+#: templates/myaccount/webinars.php:19
+msgid "You have no webinars yet."
+msgstr "Zatím nemáte žádné webináře."
+
+#: templates/myaccount/webinars.php:21
+msgid "Browse webinars"
+msgstr "Prohlédnout webináře"
+
+#. translators: %s: date and time
+#: templates/myaccount/webinars.php:44
+#, php-format
+msgid "Live webinar · %s"
+msgstr "Živý webinář · %s"
+
+#: templates/myaccount/webinars.php:49
+msgid "Recorded webinar"
+msgstr "Nahraný webinář"
+
+#: templates/myaccount/webinars.php:59
+msgid "Access has expired."
+msgstr "Přístup vypršel."
+
+#: templates/myaccount/webinars.php:60
+msgid "Buy again"
+msgstr "Koupit znovu"

@@ -73,9 +73,9 @@ Migrator: option `nmd_db_version`. Numbered migration classes run in order on `p
 
 **Zoom ID added or changed later** → on product save, schedule a batch job that registers all active holders (and cancels old registrants if the ID changed).
 
-**Start time changed** → reschedule reminders; the next reminder email carries the new time (+ updated .ics).
+**Start time changed** (product form) → async job `nmd_webinar_start_changed_job`: purchased access gets a new expiry (same days after the new start; manual grants keep their date, already-expired access can become valid again), and if the webinar had a time before and the new one is ahead, every active holder gets the "Nový termín" email with the updated .ics (same UID, higher SEQUENCE → the calendar entry moves). Setting the first start after sales started only recomputes expiries.
 
-**Reminders** → per product, Action Scheduler single actions at start −24 h and −1 h. Each one sends a reminder email (with the personal join link) to every active holder. Unscheduled when the product is trashed or switched to recorded.
+**Reminders** → per product, Action Scheduler single actions `nmd_webinar_reminder` [product, 24h|1h] at start −24 h and −1 h, kept in sync on every product save (`woocommerce_after_product_object_save`, idempotent; a reminder whose time already passed is not scheduled). The job fans out one `nmd_webinar_notify` send job per active holder; product meta `_nmd_reminders_sent` makes it fire once per start time. Guards: job running >30 min off its planned time (cron outage, moved start) is skipped; send jobs for an outdated start or ended access send nothing. Unscheduled when the product is deleted; no-op when it is no longer live. Log warning if a webinar is about to start without a Zoom ID.
 
 **Refund / cancel** → revoke the entitlement, cancel the Zoom registrant.
 
@@ -142,8 +142,8 @@ namoudusi-webinars/
     Video/BunnyStream.php       signed embed URLs
     Zoom/ZoomClient.php, FakeZoomClient.php, ZoomRegistrar.php
     Calendar/Ics.php
-    Email/AccessGrantedEmail.php, ReminderEmail.php   (WC_Email subclasses)
-    Reminders/ReminderScheduler.php
+    Email/AccessGrantedEmail.php, ZoomLinkEmail.php, ReminderEmail.php, ScheduleChangedEmail.php   (WC_Email subclasses)
+    Schedule/Reminders.php, StartChange.php
     Checkout/DigitalConsent.php
     Account/WebinarsEndpoint.php
     Admin/AccessAdmin.php       manual grants, access info on order screen
@@ -162,7 +162,7 @@ namoudusi-webinars/
 | M3 ✅ | My Account list + detail; protected documents upload + download; product page "Go to webinar" | Buyer sees the page and downloads the PDF; a non-buyer and an anonymous visitor get 403; direct file URL is denied by Apache |
 | M4 ✅ | Bunny signed player | Video plays in the account; the copied embed URL stops working after expiry and on other domains |
 | M5 ✅ | Zoom registrants (incl. late ID, cancel), access email + .ics | Personal join URL on the page and in the email; refund cancels the registrant |
-| M6 | Reminders 24 h / 1 h, reschedule on time change | Emails arrive in Mailpit at the right times (tested with a near-future start) |
+| M6 ✅ | Reminders 24 h / 1 h, reschedule on time change, expiry follows the start | Emails arrive in Mailpit at the right times (tested with a near-future start) |
 | M7 | Checkout consent checkbox | Checkout fails without it; consent + timestamp visible on the order |
 
 Separate tracks, not in this plugin: payment gateway (Comgate/GoPay), Fakturoid, GitHub Actions deploy to Webglobe, theme/design.

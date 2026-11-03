@@ -24,4 +24,12 @@ final class Log
     {
         wc_get_logger()->info($message, ['source' => 'namoudusi-webinars'] + $context);
     }
+
+    /**
+     * @param array<string, mixed> $context
+     */
+    public static function warning(string $message, array $context = []): void
+    {
+        wc_get_logger()->warning($message, ['source' => 'namoudusi-webinars'] + $context);
+    }
 }
