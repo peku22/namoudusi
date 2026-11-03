@@ -4,6 +4,7 @@ ARG UID=1000
 ARG GID=1000
 
 COPY --from=mlocati/php-extension-installer:2 /usr/bin/install-php-extensions /usr/local/bin/
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 # WP-CLI nightly: the 2.12 stable release is not PHP 8.5 clean yet (deprecation notices)
 RUN apt-get update \
@@ -17,7 +18,7 @@ RUN apt-get update \
  && sed -i 's/<VirtualHost \*:80>/<VirtualHost *:8180>/' /etc/apache2/sites-available/000-default.conf \
  && groupmod -o -g ${GID} www-data \
  && usermod -o -u ${UID} -g ${GID} www-data \
- && mkdir -p /var/www/.wp-cli && chown www-data:www-data /var/www/.wp-cli
+ && mkdir -p /var/www/.wp-cli /var/www/.composer && chown www-data:www-data /var/www/.wp-cli /var/www/.composer
 
 COPY php.ini /usr/local/etc/php/conf.d/zz-local.ini
 COPY msmtprc /etc/msmtprc

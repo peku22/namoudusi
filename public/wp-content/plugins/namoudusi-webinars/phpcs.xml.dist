@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<ruleset name="namoudusi-webinars">
+    <description>PSR-12 code style + WordPress security, database and i18n rules.</description>
+
+    <file>namoudusi-webinars.php</file>
+    <file>uninstall.php</file>
+    <file>src</file>
+    <file>templates</file>
+    <file>tests</file>
+
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <rule ref="PSR12">
+        <!-- The main plugin file declares constants and hooks next to each other by design. -->
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+    </rule>
+
+    <rule ref="WordPress.Security"/>
+    <rule ref="WordPress.DB"/>
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="namoudusi-webinars"/>
+            </property>
+        </properties>
+    </rule>
+    <rule ref="WordPress.PHP.DevelopmentFunctions"/>
+    <rule ref="WordPress.WP.AlternativeFunctions"/>
+
+    <config name="minimum_wp_version" value="6.5"/>
+    <config name="testVersion" value="8.3-"/>
+</ruleset>

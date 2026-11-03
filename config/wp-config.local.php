@@ -44,7 +44,12 @@ define( 'WP_MEMORY_LIMIT', '256M' );
 define( 'WP_POST_REVISIONS', 10 );
 
 // ** Integrations – API keys live here, never in the DB ** //
-// Constant names are defined together with the custom plugin (Zoom, Bunny Stream, payment gateway, Fakturoid).
+// Without Zoom keys the local site uses a fake Zoom client (dummy join URLs).
+// define( 'NAMOUDUSI_BUNNY_LIBRARY_ID', '' );
+// define( 'NAMOUDUSI_BUNNY_TOKEN_KEY', '' );     // Stream library → Security → token authentication key
+// define( 'NAMOUDUSI_ZOOM_ACCOUNT_ID', '' );     // Zoom Server-to-Server OAuth app
+// define( 'NAMOUDUSI_ZOOM_CLIENT_ID', '' );
+// define( 'NAMOUDUSI_ZOOM_CLIENT_SECRET', '' );
 
 /* That's all, stop editing! Happy publishing. */
 

@@ -15,6 +15,7 @@
 # Plugin build/dependency artifacts
 /public/wp-content/plugins/*/vendor/
 /public/wp-content/plugins/*/node_modules/
+/public/wp-content/plugins/*/.phpunit.result.cache
 
 # Editors / OS
 .idea/

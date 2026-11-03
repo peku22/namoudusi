@@ -7,6 +7,7 @@
 - Local: plain docker compose (compose.yaml, project name `namoudusi`, network `namoudusi_default`, volume `namoudusi_db_data`), runs alongside flatio – never touch flatio containers, no global prune
   - Services: web (PHP 8.5 + Apache, matches Webglobe) http://namoudusi.localhost:8180 (own cookie scope, not plain localhost), db MariaDB 10.5 on 127.0.0.1:3307, Mailpit http://localhost:8125, cron (runs due WP-cron events every 60 s)
   - Fresh clone: `bin/setup.sh` (idempotent; creates .env, wp-config.php, installs WP + WooCommerce with project defaults)
+  - Plugin checks: `docker compose exec -u www-data -w /var/www/html/wp-content/plugins/namoudusi-webinars web composer check` (PHPCS + PHPStan + PHPUnit)
   - Docroot ./public; WP-CLI: `docker compose exec -u www-data web wp ...`; Xdebug via XDEBUG_MODE in .env
 
 ## Product types (simple + virtual Woo products with a "Webinář" tab; access via own entitlements table)
