@@ -32,7 +32,7 @@ spl_autoload_register(static function (string $class): void {
     }
 });
 
-register_activation_hook(__FILE__, [Namoudusi\Webinars\Database\Migrator::class, 'migrate']);
+register_activation_hook(__FILE__, [Namoudusi\Webinars\Plugin::class, 'activate']);
 
 add_action('before_woocommerce_init', [Namoudusi\Webinars\Plugin::class, 'declareWooCompatibility']);
 add_action('plugins_loaded', [Namoudusi\Webinars\Plugin::class, 'boot']);

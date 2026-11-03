@@ -17,6 +17,11 @@
         <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
     </rule>
 
+    <!-- Templates are HTML-heavy; long lines there are fine. -->
+    <rule ref="Generic.Files.LineLength">
+        <exclude-pattern>templates/*</exclude-pattern>
+    </rule>
+
     <rule ref="WordPress.Security"/>
     <rule ref="WordPress.DB"/>
     <rule ref="WordPress.WP.I18n">
@@ -27,7 +32,10 @@
         </properties>
     </rule>
     <rule ref="WordPress.PHP.DevelopmentFunctions"/>
-    <rule ref="WordPress.WP.AlternativeFunctions"/>
+    <rule ref="WordPress.WP.AlternativeFunctions">
+        <!-- Unit tests run without WordPress. -->
+        <exclude-pattern>tests/*</exclude-pattern>
+    </rule>
 
     <config name="minimum_wp_version" value="6.5"/>
     <config name="testVersion" value="8.3-"/>

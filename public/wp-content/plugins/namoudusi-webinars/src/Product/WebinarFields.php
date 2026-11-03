@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Namoudusi\Webinars\Product;
 
+use Namoudusi\Webinars\Documents\Document;
+use Namoudusi\Webinars\Documents\DocumentStorage;
+
 /**
  * "Webinar" tab in the WooCommerce product data box.
  */
@@ -16,6 +19,14 @@ final class WebinarFields
         add_filter('woocommerce_product_data_tabs', [$this, 'addTab']);
         add_action('woocommerce_product_data_panels', [$this, 'renderPanel']);
         add_action('woocommerce_admin_process_product_object', [$this, 'save']);
+        add_action('post_edit_form_tag', [$this, 'enableFileUploads']);
+    }
+
+    public function enableFileUploads(\WP_Post $post): void
+    {
+        if ($post->post_type === 'product') {
+            echo ' enctype="multipart/form-data"';
+        }
     }
 
     /**
@@ -122,6 +133,8 @@ final class WebinarFields
         ]);
         echo '</div>';
 
+        $this->renderDocuments(Webinar::documentsFromMeta($product?->get_meta(Webinar::META_DOCUMENTS)));
+
         echo '</div>';
         ?>
         <script>
@@ -168,6 +181,8 @@ final class WebinarFields
         $zoomKind = ZoomKind::tryFrom($input(Webinar::META_ZOOM_KIND)) ?? ZoomKind::Meeting;
         $product->update_meta_data(Webinar::META_ZOOM_KIND, $zoomKind->value);
 
+        $this->saveDocuments($product);
+
         if ($type === WebinarType::Recorded && $videoId === '') {
             \WC_Admin_Meta_Boxes::add_error(
                 __('Recorded webinar: the Bunny video ID is missing.', 'namoudusi-webinars')
@@ -178,6 +193,140 @@ final class WebinarFields
                 __('Live webinar: the start date and time are missing.', 'namoudusi-webinars')
             );
         }
+    }
+
+    /**
+     * @param list<Document> $documents
+     */
+    private function renderDocuments(array $documents): void
+    {
+        ?>
+        <div class="options_group">
+            <p class="form-field">
+                <label><?php esc_html_e('Documents', 'namoudusi-webinars'); ?></label>
+                <span class="wrap" style="display:block">
+                    <?php if ($documents !== []) : ?>
+                        <table class="widefat" style="margin-bottom:8px">
+                            <thead>
+                            <tr>
+                                <th><?php esc_html_e('Title', 'namoudusi-webinars'); ?></th>
+                                <th><?php esc_html_e('File', 'namoudusi-webinars'); ?></th>
+                                <th><?php esc_html_e('Delete', 'namoudusi-webinars'); ?></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($documents as $document) : ?>
+                                <?php $name = 'nmd_documents[' . $document->id . ']'; ?>
+                                <tr>
+                                    <td>
+                                        <input type="text" class="short" style="width:100%"
+                                               name="<?php echo esc_attr($name . '[title]'); ?>"
+                                               value="<?php echo esc_attr($document->title); ?>">
+                                    </td>
+                                    <td>
+                                        <?php echo esc_html(basename($document->file)); ?>
+                                        (<?php echo esc_html((string) size_format($document->size)); ?>)
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" value="1"
+                                               name="<?php echo esc_attr($name . '[delete]'); ?>">
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+                    <input type="file" name="nmd_document_upload[]" multiple
+                           accept="<?php echo esc_attr($this->acceptAttribute()); ?>">
+                </span>
+                <span class="description" style="display:block;clear:both">
+                    <?php esc_html_e(
+                        'Only customers with access can download these files; they are not in the media library.',
+                        'namoudusi-webinars'
+                    ); ?>
+                </span>
+            </p>
+        </div>
+        <?php
+    }
+
+    private function saveDocuments(\WC_Product $product): void
+    {
+        // phpcs:disable WordPress.Security.NonceVerification.Missing -- WooCommerce verifies its product nonce before this hook.
+        // phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- each field is sanitized below.
+        $posted = isset($_POST['nmd_documents']) && is_array($_POST['nmd_documents'])
+            ? wp_unslash($_POST['nmd_documents'])
+            : [];
+        // phpcs:enable
+
+        $documents = [];
+        foreach (Webinar::documentsFromMeta($product->get_meta(Webinar::META_DOCUMENTS)) as $document) {
+            $input = is_array($posted[$document->id] ?? null) ? $posted[$document->id] : [];
+            if (!empty($input['delete'])) {
+                DocumentStorage::delete($document);
+                continue;
+            }
+            $title = isset($input['title']) ? sanitize_text_field((string) $input['title']) : '';
+            $documents[] = $title !== '' ? $document->withTitle($title) : $document;
+        }
+
+        foreach ($this->uploadedFiles() as $file) {
+            $result = DocumentStorage::store($file, $product->get_id());
+            if ($result instanceof Document) {
+                $documents[] = $result;
+            } else {
+                \WC_Admin_Meta_Boxes::add_error(sprintf(
+                    /* translators: 1: file name, 2: error message */
+                    __('Document "%1$s" was not uploaded: %2$s', 'namoudusi-webinars'),
+                    sanitize_file_name($file['name']),
+                    $result
+                ));
+            }
+        }
+
+        $product->update_meta_data(
+            Webinar::META_DOCUMENTS,
+            array_map(static fn (Document $document) => $document->toArray(), $documents)
+        );
+    }
+
+    /**
+     * Normalizes the multi-file input into a list of single $_FILES entries.
+     *
+     * @return list<array{name: string, type: string, tmp_name: string, error: int, size: int}>
+     */
+    private function uploadedFiles(): array
+    {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- nonce: see saveDocuments(); files are validated by wp_handle_upload().
+        $upload = $_FILES['nmd_document_upload'] ?? null;
+        if (!is_array($upload) || !is_array($upload['name'] ?? null)) {
+            return [];
+        }
+        $files = [];
+        foreach ($upload['name'] as $i => $name) {
+            if ((int) $upload['error'][$i] === UPLOAD_ERR_NO_FILE) {
+                continue;
+            }
+            $files[] = [
+                'name' => (string) $name,
+                'type' => (string) $upload['type'][$i],
+                'tmp_name' => (string) $upload['tmp_name'][$i],
+                'error' => (int) $upload['error'][$i],
+                'size' => (int) $upload['size'][$i],
+            ];
+        }
+        return $files;
+    }
+
+    private function acceptAttribute(): string
+    {
+        $extensions = [];
+        foreach (array_keys(DocumentStorage::ALLOWED_MIMES) as $pattern) {
+            foreach (explode('|', $pattern) as $extension) {
+                $extensions[] = '.' . $extension;
+            }
+        }
+        return implode(',', $extensions);
     }
 
     private function toLocalInput(string $utc): string

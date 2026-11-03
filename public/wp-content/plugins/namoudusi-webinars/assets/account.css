@@ -1,0 +1,7 @@
+.nmd-webinars { list-style: none; margin: 0; padding: 0; }
+.nmd-webinars__item { display: flex; flex-direction: column; gap: .25em; padding: 1em 0; border-bottom: 1px solid rgba(0, 0, 0, .1); }
+.nmd-webinars__title { font-weight: 600; font-size: 1.1em; }
+.nmd-webinars__meta, .nmd-webinars__access, .nmd-webinar__hint, .nmd-webinar__size, .nmd-webinar__access { font-size: .9em; opacity: .8; }
+.nmd-webinars__item--expired .nmd-webinars__title { opacity: .6; }
+.nmd-webinar__section { margin: 1.5em 0; }
+.nmd-webinar__documents ul { padding-left: 1.2em; }

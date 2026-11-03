@@ -8,7 +8,7 @@
   - Services: web (PHP 8.5 + Apache, matches Webglobe) http://namoudusi.localhost:8180 (own cookie scope, not plain localhost), db MariaDB 10.5 on 127.0.0.1:3307, Mailpit http://localhost:8125, Adminer http://localhost:8181 (server `db`), cron (runs due WP-cron events every 60 s)
   - Fresh clone: `bin/setup.sh` (idempotent; creates .env, wp-config.php, installs WP + WooCommerce with project defaults)
   - Plugin checks: `docker compose exec -u www-data -w /var/www/html/wp-content/plugins/namoudusi-webinars web composer check` (PHPCS + PHPStan + PHPUnit)
-  - Plugin smoke test (real WP, creates + removes its own data): `docker compose exec -u www-data web wp eval-file wp-content/plugins/namoudusi-webinars/tests/smoke/access-flow.php`
+  - Plugin smoke tests (real WP + HTTP, create and remove their own data): `docker compose exec -u www-data web wp eval-file wp-content/plugins/namoudusi-webinars/tests/smoke/<access-flow|account-flow>.php`
   - i18n: English source strings, Czech in languages/*.po; after string changes run in the plugin dir: `wp i18n make-pot . languages/namoudusi-webinars.pot --exclude=vendor,tests --skip-js`, update the .po, then `wp i18n make-mo languages && wp i18n make-php languages`
   - Access admin CLI: `wp nmd access list|grant|revoke` (use --customer, not --user)
   - Docroot ./public; WP-CLI: `docker compose exec -u www-data web wp ...`; Xdebug via XDEBUG_MODE in .env

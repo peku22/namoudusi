@@ -8,9 +8,12 @@ use Automattic\WooCommerce\Utilities\FeaturesUtil;
 use Namoudusi\Webinars\Access\AccessService;
 use Namoudusi\Webinars\Access\EntitlementRepository;
 use Namoudusi\Webinars\Access\OrderListener;
+use Namoudusi\Webinars\Account\ProductPage;
+use Namoudusi\Webinars\Account\WebinarsEndpoint;
 use Namoudusi\Webinars\Admin\AccessAdmin;
 use Namoudusi\Webinars\Cli\AccessCommand;
 use Namoudusi\Webinars\Database\Migrator;
+use Namoudusi\Webinars\Documents\DocumentStorage;
 use Namoudusi\Webinars\Product\WebinarFields;
 
 final class Plugin
@@ -50,12 +53,28 @@ final class Plugin
         $access = self::access();
 
         (new OrderListener($access, $entitlements))->register();
+        (new WebinarsEndpoint($access, $entitlements))->register();
+        (new ProductPage($access))->register();
+        add_action('before_delete_post', [self::class, 'deleteProductDocuments'], 10, 2);
         if (is_admin()) {
             (new WebinarFields())->register();
             (new AccessAdmin($access, $entitlements))->register();
         }
         if (defined('WP_CLI') && WP_CLI) {
             \WP_CLI::add_command('nmd access', new AccessCommand($access, $entitlements));
+        }
+    }
+
+    public static function activate(): void
+    {
+        Migrator::migrate();
+        DocumentStorage::ensureProtected();
+    }
+
+    public static function deleteProductDocuments(int $postId, \WP_Post $post): void
+    {
+        if ($post->post_type === 'product') {
+            DocumentStorage::deleteProductDir($postId);
         }
     }
 

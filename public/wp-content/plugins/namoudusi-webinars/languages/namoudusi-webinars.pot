@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-03T14:20:50+01:00\n"
+"POT-Creation-Date: 2026-11-03T14:33:34+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 3.0.0-alpha-6bf617c\n"
 "X-Domain: namoudusi-webinars\n"
@@ -77,6 +77,38 @@ msgstr ""
 msgid "Access to webinar \"%s\" revoked."
 msgstr ""
 
+#: src/Account/ProductPage.php:42
+msgid "You already have access to this webinar."
+msgstr ""
+
+#: src/Account/ProductPage.php:44
+msgid "Go to webinar"
+msgstr ""
+
+#: src/Account/ProductPage.php:59
+msgid "Go to My webinars"
+msgstr ""
+
+#: src/Account/WebinarsEndpoint.php:83
+#: src/Account/WebinarsEndpoint.php:87
+#: src/Account/WebinarsEndpoint.php:95
+#: templates/myaccount/webinar.php:41
+msgid "My webinars"
+msgstr ""
+
+#: src/Account/WebinarsEndpoint.php:140
+msgid "The document does not exist."
+msgstr ""
+
+#: src/Account/WebinarsEndpoint.php:143
+msgid "You do not have access to this document."
+msgstr ""
+
+#: src/Account/WebinarsEndpoint.php:220
+#: templates/myaccount/webinar.php:27
+msgid "Back to My webinars"
+msgstr ""
+
 #: src/Admin/AccessAdmin.php:39
 #: src/Admin/AccessAdmin.php:77
 msgid "Webinar access"
@@ -88,7 +120,7 @@ msgstr ""
 
 #: src/Admin/AccessAdmin.php:82
 #: src/Admin/AccessAdmin.php:116
-#: src/Product/WebinarFields.php:28
+#: src/Product/WebinarFields.php:39
 msgid "Webinar"
 msgstr ""
 
@@ -132,92 +164,185 @@ msgstr ""
 msgid "Leave empty for no time limit. Replaces any existing expiry of this webinar."
 msgstr ""
 
-#: src/Plugin.php:71
+#: src/Plugin.php:90
 msgid "Na mou duši – Webináře requires WooCommerce to be active."
 msgstr ""
 
-#: src/Plugin.php:86
+#: src/Plugin.php:105
 msgid "Na mou duši – Webináře: missing wp-config.php constants:"
 msgstr ""
 
-#: src/Product/WebinarFields.php:47
+#: src/Product/WebinarFields.php:58
 msgid "Webinar type"
 msgstr ""
 
-#: src/Product/WebinarFields.php:50
+#: src/Product/WebinarFields.php:61
 msgid "— Not a webinar —"
 msgstr ""
 
-#: src/Product/WebinarFields.php:51
+#: src/Product/WebinarFields.php:62
 msgid "Recorded"
 msgstr ""
 
-#: src/Product/WebinarFields.php:52
+#: src/Product/WebinarFields.php:63
 msgid "Live (Zoom)"
 msgstr ""
 
-#: src/Product/WebinarFields.php:55
+#: src/Product/WebinarFields.php:66
 msgid "Webinar products are always virtual and sold one per customer."
 msgstr ""
 
-#: src/Product/WebinarFields.php:59
+#: src/Product/WebinarFields.php:70
 msgid "Access (days)"
 msgstr ""
 
-#: src/Product/WebinarFields.php:62
+#: src/Product/WebinarFields.php:73
 msgid "No time limit"
 msgstr ""
 
-#: src/Product/WebinarFields.php:65
+#: src/Product/WebinarFields.php:76
 msgid "Empty = no time limit. Live: counted from the event start; recorded: from the purchase."
 msgstr ""
 
-#: src/Product/WebinarFields.php:72
+#: src/Product/WebinarFields.php:83
 msgid "Bunny video ID"
 msgstr ""
 
-#: src/Product/WebinarFields.php:76
+#: src/Product/WebinarFields.php:87
 msgid "Required for recorded webinars. For live webinars, add the recording here after the event."
 msgstr ""
 
-#: src/Product/WebinarFields.php:86
+#: src/Product/WebinarFields.php:97
 msgid "Start"
 msgstr ""
 
 #. translators: %s: timezone name
-#: src/Product/WebinarFields.php:92
+#: src/Product/WebinarFields.php:103
 #, php-format
 msgid "Time in %s."
 msgstr ""
 
-#: src/Product/WebinarFields.php:98
+#: src/Product/WebinarFields.php:109
 msgid "Duration (minutes)"
 msgstr ""
 
-#: src/Product/WebinarFields.php:105
+#: src/Product/WebinarFields.php:116
 msgid "Zoom ID"
 msgstr ""
 
-#: src/Product/WebinarFields.php:109
+#: src/Product/WebinarFields.php:120
 msgid "Can be added later; buyers are then registered automatically. Registration must be enabled in Zoom."
 msgstr ""
 
-#: src/Product/WebinarFields.php:116
+#: src/Product/WebinarFields.php:127
 msgid "Zoom type"
 msgstr ""
 
-#: src/Product/WebinarFields.php:119
+#: src/Product/WebinarFields.php:130
 msgid "Meeting"
 msgstr ""
 
-#: src/Product/WebinarFields.php:120
+#: src/Product/WebinarFields.php:131
 msgid "Webinar (Zoom Webinars add-on)"
 msgstr ""
 
-#: src/Product/WebinarFields.php:173
+#: src/Product/WebinarFields.php:188
 msgid "Recorded webinar: the Bunny video ID is missing."
 msgstr ""
 
-#: src/Product/WebinarFields.php:178
+#: src/Product/WebinarFields.php:193
 msgid "Live webinar: the start date and time are missing."
+msgstr ""
+
+#: src/Product/WebinarFields.php:206
+#: templates/myaccount/webinar.php:82
+msgid "Documents"
+msgstr ""
+
+#: src/Product/WebinarFields.php:212
+msgid "Title"
+msgstr ""
+
+#: src/Product/WebinarFields.php:213
+msgid "File"
+msgstr ""
+
+#: src/Product/WebinarFields.php:214
+msgid "Delete"
+msgstr ""
+
+#: src/Product/WebinarFields.php:243
+msgid "Only customers with access can download these files; they are not in the media library."
+msgstr ""
+
+#. translators: 1: file name, 2: error message
+#: src/Product/WebinarFields.php:280
+#, php-format
+msgid "Document \"%1$s\" was not uploaded: %2$s"
+msgstr ""
+
+#: templates/myaccount/webinar.php:24
+msgid "You do not have access to this webinar."
+msgstr ""
+
+#: templates/myaccount/webinar.php:30
+msgid "Buy access"
+msgstr ""
+
+#: templates/myaccount/webinar.php:45
+#: templates/myaccount/webinars.php:45
+msgid "Live webinar"
+msgstr ""
+
+#. translators: %d: minutes
+#: templates/myaccount/webinar.php:52
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/myaccount/webinar.php:60
+msgid "Join on Zoom"
+msgstr ""
+
+#: templates/myaccount/webinar.php:63
+msgid "This link is personal – please do not share it."
+msgstr ""
+
+#: templates/myaccount/webinar.php:65
+msgid "We will add your personal Zoom link here before the webinar starts and send it to you by email."
+msgstr ""
+
+#. translators: %s: "until <date>" or "no time limit"
+#: templates/myaccount/webinar.php:99
+#: templates/myaccount/webinars.php:56
+#, php-format
+msgid "Access: %s"
+msgstr ""
+
+#: templates/myaccount/webinars.php:19
+msgid "You have no webinars yet."
+msgstr ""
+
+#: templates/myaccount/webinars.php:21
+msgid "Browse webinars"
+msgstr ""
+
+#. translators: %s: date and time
+#: templates/myaccount/webinars.php:44
+#, php-format
+msgid "Live webinar · %s"
+msgstr ""
+
+#: templates/myaccount/webinars.php:49
+msgid "Recorded webinar"
+msgstr ""
+
+#: templates/myaccount/webinars.php:59
+msgid "Access has expired."
+msgstr ""
+
+#: templates/myaccount/webinars.php:60
+msgid "Buy again"
 msgstr ""

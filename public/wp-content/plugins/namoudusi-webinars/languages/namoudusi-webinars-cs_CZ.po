@@ -151,3 +151,87 @@ msgstr "Nahraný webinář: chybí ID videa v Bunny."
 
 msgid "Live webinar: the start date and time are missing."
 msgstr "Živý webinář: chybí datum a čas začátku."
+
+msgid "You already have access to this webinar."
+msgstr "K tomuto webináři už máte přístup."
+
+msgid "Go to webinar"
+msgstr "Přejít na webinář"
+
+msgid "Go to My webinars"
+msgstr "Přejít na Moje webináře"
+
+msgid "My webinars"
+msgstr "Moje webináře"
+
+msgid "The document does not exist."
+msgstr "Dokument neexistuje."
+
+msgid "You do not have access to this document."
+msgstr "K tomuto dokumentu nemáte přístup."
+
+msgid "Back to My webinars"
+msgstr "Zpět na Moje webináře"
+
+msgid "Documents"
+msgstr "Dokumenty"
+
+msgid "Title"
+msgstr "Název"
+
+msgid "File"
+msgstr "Soubor"
+
+msgid "Delete"
+msgstr "Smazat"
+
+msgid "Only customers with access can download these files; they are not in the media library."
+msgstr "Soubory si mohou stáhnout jen zákazníci s přístupem; nejsou v knihovně médií."
+
+msgid "Document \"%1$s\" was not uploaded: %2$s"
+msgstr "Dokument „%1$s“ se nepodařilo nahrát: %2$s"
+
+msgid "You do not have access to this webinar."
+msgstr "K tomuto webináři nemáte přístup."
+
+msgid "Buy access"
+msgstr "Koupit přístup"
+
+msgid "Live webinar"
+msgstr "Živý webinář"
+
+msgid "Join on Zoom"
+msgstr "Připojit se přes Zoom"
+
+msgid "This link is personal – please do not share it."
+msgstr "Odkaz je osobní – prosíme, nesdílejte ho."
+
+msgid "We will add your personal Zoom link here before the webinar starts and send it to you by email."
+msgstr "Osobní odkaz na Zoom sem doplníme před začátkem webináře a pošleme vám ho e-mailem."
+
+msgid "Access: %s"
+msgstr "Přístup: %s"
+
+msgid "You have no webinars yet."
+msgstr "Zatím nemáte žádné webináře."
+
+msgid "Browse webinars"
+msgstr "Prohlédnout webináře"
+
+msgid "Live webinar · %s"
+msgstr "Živý webinář · %s"
+
+msgid "Recorded webinar"
+msgstr "Nahraný webinář"
+
+msgid "Access has expired."
+msgstr "Přístup vypršel."
+
+msgid "Buy again"
+msgstr "Koupit znovu"
+
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuta"
+msgstr[1] "%d minuty"
+msgstr[2] "%d minut"
