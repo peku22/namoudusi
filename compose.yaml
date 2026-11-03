@@ -14,7 +14,6 @@ services:
         UID: ${HOST_UID:-1000}
         GID: ${HOST_GID:-1000}
     image: namoudusi-php:8.5-apache
-    container_name: namoudusi-web
     restart: unless-stopped
     depends_on:
       db:
@@ -30,13 +29,12 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
-      namoudusi_net:
+      default:
         aliases: [namoudusi.localhost]
 
   # Real cron instead of WP-cron (DISABLE_WP_CRON in wp-config)
   cron:
     image: namoudusi-php:8.5-apache
-    container_name: namoudusi-cron
     restart: unless-stopped
     depends_on:
       - web
@@ -53,11 +51,9 @@ services:
           wp core is-installed --quiet 2>/dev/null && wp cron event run --due-now --quiet
           sleep 60
         done
-    networks: [namoudusi_net]
 
   db:
     image: mariadb:10.5
-    container_name: namoudusi-db
     restart: unless-stopped
     ports:
       - "127.0.0.1:${DB_PORT:-3307}:3306"
@@ -74,20 +70,12 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20
-    networks: [namoudusi_net]
 
   mailpit:
     image: axllent/mailpit:latest
-    container_name: namoudusi-mailpit
     restart: unless-stopped
     ports:
       - "127.0.0.1:${MAILPIT_PORT:-8125}:8025"
-    networks: [namoudusi_net]
-
-networks:
-  namoudusi_net:
-    name: namoudusi_net
 
 volumes:
   db_data:
-    name: namoudusi_db_data

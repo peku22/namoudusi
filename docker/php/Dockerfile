@@ -16,7 +16,8 @@ RUN apt-get update \
  && sed -i 's/^Listen 80$/Listen 8180/' /etc/apache2/ports.conf \
  && sed -i 's/<VirtualHost \*:80>/<VirtualHost *:8180>/' /etc/apache2/sites-available/000-default.conf \
  && groupmod -o -g ${GID} www-data \
- && usermod -o -u ${UID} -g ${GID} www-data
+ && usermod -o -u ${UID} -g ${GID} www-data \
+ && mkdir -p /var/www/.wp-cli && chown www-data:www-data /var/www/.wp-cli
 
 COPY php.ini /usr/local/etc/php/conf.d/zz-local.ini
 COPY msmtprc /etc/msmtprc
