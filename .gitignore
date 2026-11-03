@@ -1,0 +1,23 @@
+# Local secrets
+.env
+
+# Downloaded installers
+*.zip
+
+# WordPress: only our own code is versioned
+/public/*
+!/public/wp-content/
+/public/wp-content/*
+!/public/wp-content/plugins/
+/public/wp-content/plugins/*
+!/public/wp-content/plugins/clientname-seminars/
+
+# Plugin build/dependency artifacts
+/public/wp-content/plugins/*/vendor/
+/public/wp-content/plugins/*/node_modules/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
