@@ -13,7 +13,7 @@ WP_LOCALE=cs_CZ
 SITE_URL=http://namoudusi.localhost:8180
 SITE_TITLE="Na mou duši"
 SITE_TAGLINE="Psychologické služby a terapeutické techniky"
-OWN_PLUGIN=clientname-seminars
+OWN_PLUGIN=namoudusi-webinars
 
 ADMIN_USER=${ADMIN_USER:-$USER}
 ADMIN_EMAIL=${ADMIN_EMAIL:-$(git config user.email || true)}

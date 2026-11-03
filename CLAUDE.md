@@ -1,21 +1,21 @@
-# Project: Client eshop – online seminars & videos
+# Project: Na mou duši – eshop with recorded & live webinars
 
 ## Stack
 - WordPress + WooCommerce, standard structure (no Bedrock)
-- Custom plugin: wp-content/plugins/clientname-seminars (only our code is in Git)
+- Custom plugin: public/wp-content/plugins/namoudusi-webinars (only our code is in Git); detailed plan in docs/plugin-plan.md
 - Hosting: Webglobe (Czech), staging on subdomain, production; deploy via GitHub Actions + rsync over SSH (check SSH port, possibly 222)
 - Local: plain docker compose (compose.yaml, project name `namoudusi`, network `namoudusi_default`, volume `namoudusi_db_data`), runs alongside flatio – never touch flatio containers, no global prune
   - Services: web (PHP 8.5 + Apache, matches Webglobe) http://namoudusi.localhost:8180 (own cookie scope, not plain localhost), db MariaDB 10.5 on 127.0.0.1:3307, Mailpit http://localhost:8125, cron (runs due WP-cron events every 60 s)
   - Fresh clone: `bin/setup.sh` (idempotent; creates .env, wp-config.php, installs WP + WooCommerce with project defaults)
   - Docroot ./public; WP-CLI: `docker compose exec -u www-data web wp ...`; Xdebug via XDEBUG_MODE in .env
 
-## Product types
-1. Online seminar: virtual product with date/time, capacity (stock), Zoom meeting ID.
-   On order completed → Zoom API registrant per buyer → unique join_url stored in order item meta,
-   sent in email with .ics; reminders 24h and 1h before via Action Scheduler.
-2. Online video: virtual product with Bunny Stream video ID and optional access duration.
-   On order completed → row in custom entitlements table (user_id, product_id, expires_at).
-   "My videos" tab in My Account; player uses short-lived Bunny token-signed embed URL.
+## Product types (simple + virtual Woo products with a "Webinář" tab; access via own entitlements table)
+1. Recorded webinar: Bunny Stream video, playable only in My Account → Moje webináře
+   (short-lived token-signed embed URL + domain restriction; no shareable link).
+2. Live webinar: Zoom meeting; per-buyer registrant join_url shown on the account page as soon as the
+   meeting ID is known; .ics; reminders 24h and 1h before via Action Scheduler; recording can be added later.
+- Both: optional documents (PDF…) in a protected folder, served only after an access check.
+- Access per product: forever or N days. Capacity for live = stock.
 
 ## Requirements
 - Czech payment gateway (Comgate/GoPay – TBD), invoicing via Fakturoid (TBD)

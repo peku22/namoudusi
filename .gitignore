@@ -10,7 +10,7 @@
 /public/wp-content/*
 !/public/wp-content/plugins/
 /public/wp-content/plugins/*
-!/public/wp-content/plugins/clientname-seminars/
+!/public/wp-content/plugins/namoudusi-webinars/
 
 # Plugin build/dependency artifacts
 /public/wp-content/plugins/*/vendor/
