@@ -235,3 +235,15 @@ msgid_plural "%d minutes"
 msgstr[0] "%d minuta"
 msgstr[1] "%d minuty"
 msgstr[2] "%d minut"
+
+msgid "Recording"
+msgstr "Záznam"
+
+msgid "Video"
+msgstr "Video"
+
+msgid "The video cannot be played right now. Please try again later or contact us."
+msgstr "Video teď nelze přehrát. Zkuste to prosím později, nebo nás kontaktujte."
+
+msgid "The Bunny video ID should look like 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID)."
+msgstr "ID videa v Bunny má tvar 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID)."

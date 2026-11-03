@@ -91,6 +91,16 @@ Migrator: option `nmd_db_version`. Numbered migration classes run in order on `p
 - Product page: if the user already has access, show "Přejít na webinář" (go to the webinar) instead of "Add to cart".
 - Templates in `templates/`, overridable from the theme (`namoudusi-webinars/...`).
 
+## Bunny Stream setup (per library)
+
+1. Stream → library → **Security**: enable **Embed view token authentication**; copy the token key to `NAMOUDUSI_BUNNY_TOKEN_KEY`, the library ID to `NAMOUDUSI_BUNNY_LIBRARY_ID`.
+2. **Allowed domains** (referrers): production domain, staging subdomain (and `namoudusi.localhost` for local tests).
+3. Disable **MP4 fallback / direct file access** so only the HLS player works.
+4. Video ID for a product: Stream → video → *Video ID* (GUID).
+
+The plugin signs `SHA256_HEX(token_key + video_id + expires)`, link valid 1 h (filter `nmd_bunny_token_ttl`).
+To verify with the first real credentials: the embed host (`iframe.mediadelivery.net`) is still current.
+
 ## Configuration (`wp-config.php`)
 
 ```php
@@ -141,7 +151,7 @@ namoudusi-webinars/
 | M1 ✅ | Skeleton: bootstrap, autoloader, Config, Migrator + entitlements table, HPOS/blocks compatibility, PHPCS + PHPStan + PHPUnit | Plugin activates and deactivates cleanly; table created; lint passes |
 | M2 ✅ | Webinář product tab; OrderListener (grant / extend / revoke, auto-complete); manual grant in admin + `wp nmd access` CLI; Czech translation | `tests/smoke/access-flow.php` passes |
 | M3 ✅ | My Account list + detail; protected documents upload + download; product page "Go to webinar" | Buyer sees the page and downloads the PDF; a non-buyer and an anonymous visitor get 403; direct file URL is denied by Apache |
-| M4 | Bunny signed player | Video plays in the account; the copied embed URL stops working after expiry and on other domains |
+| M4 ✅ | Bunny signed player | Video plays in the account; the copied embed URL stops working after expiry and on other domains |
 | M5 | Zoom registrants (incl. late ID, cancel), access email + .ics | Personal join URL on the page and in the email; refund cancels the registrant |
 | M6 | Reminders 24 h / 1 h, reschedule on time change | Emails arrive in Mailpit at the right times (tested with a near-future start) |
 | M7 | Checkout consent checkbox | Checkout fails without it; consent + timestamp visible on the order |

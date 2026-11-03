@@ -6,6 +6,7 @@ namespace Namoudusi\Webinars\Product;
 
 use Namoudusi\Webinars\Documents\Document;
 use Namoudusi\Webinars\Documents\DocumentStorage;
+use Namoudusi\Webinars\Video\BunnyStream;
 
 /**
  * "Webinar" tab in the WooCommerce product data box.
@@ -187,6 +188,12 @@ final class WebinarFields
             \WC_Admin_Meta_Boxes::add_error(
                 __('Recorded webinar: the Bunny video ID is missing.', 'namoudusi-webinars')
             );
+        }
+        if ($videoId !== '' && !BunnyStream::isValidVideoId($videoId)) {
+            \WC_Admin_Meta_Boxes::add_error(__(
+                'The Bunny video ID should look like 1b2c3d4e-0000-4a5b-8c9d-0123456789ab (Stream → video → Video ID).',
+                'namoudusi-webinars'
+            ));
         }
         if ($type === WebinarType::Live && $startsAt === null) {
             \WC_Admin_Meta_Boxes::add_error(

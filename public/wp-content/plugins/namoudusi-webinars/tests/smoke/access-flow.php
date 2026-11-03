@@ -62,7 +62,7 @@ try {
 
     $recorded = $makeProduct('SMOKE recorded 30d', [
         Webinar::META_TYPE => 'recorded',
-        Webinar::META_BUNNY_VIDEO_ID => 'abc-123',
+        Webinar::META_BUNNY_VIDEO_ID => '11111111-2222-4333-8444-555555555555',
         Webinar::META_ACCESS_DAYS => '30',
     ]);
     $startLocal = (new DateTimeImmutable('+10 days', wp_timezone()))->setTime(18, 0);
@@ -75,7 +75,7 @@ try {
     ]);
     $unlimited = $makeProduct('SMOKE recorded unlimited', [
         Webinar::META_TYPE => 'recorded',
-        Webinar::META_BUNNY_VIDEO_ID => 'def-456',
+        Webinar::META_BUNNY_VIDEO_ID => '66666666-7777-4888-9999-000000000000',
     ]);
     $plain = $makeProduct('SMOKE plain product', []);
 

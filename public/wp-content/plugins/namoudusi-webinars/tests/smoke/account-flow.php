@@ -18,6 +18,8 @@ use Namoudusi\Webinars\Documents\DocumentStorage;
 use Namoudusi\Webinars\Plugin;
 use Namoudusi\Webinars\Product\Webinar;
 use Namoudusi\Webinars\Product\WebinarFields;
+use Namoudusi\Webinars\Video\BunnyStream;
+use Namoudusi\Webinars\Video\VideoPlayer;
 
 $failures = 0;
 $check = static function (string $label, bool $ok, string $detail = '') use (&$failures): void {
@@ -68,7 +70,7 @@ try {
         $created['products'][] = $product->get_id();
         return $product;
     };
-    $recorded = $makeProduct('SMOKE Nahraný webinář', [Webinar::META_TYPE => 'recorded', Webinar::META_BUNNY_VIDEO_ID => 'abc']);
+    $recorded = $makeProduct('SMOKE Nahraný webinář', [Webinar::META_TYPE => 'recorded', Webinar::META_BUNNY_VIDEO_ID => '11111111-2222-4333-8444-555555555555']);
     $live = $makeProduct('SMOKE Živý webinář', [
         Webinar::META_TYPE => 'live',
         Webinar::META_STARTS_AT => (new DateTimeImmutable('+5 days', wp_timezone()))->format('Y-m-d\T18:00'),
@@ -107,8 +109,10 @@ try {
     $check('list shows both webinars, live first', ($a = strpos($body, 'SMOKE Živý')) !== false && ($b = strpos($body, 'SMOKE Nahraný')) !== false && $a < $b);
     [$status, $body] = $get($detail, $buyer);
     $check('detail 200 with document link', $status === 200 && str_contains($body, 'Pracovní list') && str_contains($body, $document->id));
+    $check('recorded detail: player placeholder without Bunny credentials (local)', str_contains($body, 'nmd-player--placeholder') && str_contains($body, 'NAMOUDUSI_BUNNY_LIBRARY_ID'));
     [$status, $body] = $get($liveDetail, $buyer);
     $check('live detail shows personal Zoom link', $status === 200 && str_contains($body, 'tk=smoke-personal'));
+    $check('live detail without recording has no player', !str_contains($body, 'nmd-player'));
     [$status, $body, $headers] = $get($download, $buyer);
     $check('download 200 with the file', $status === 200 && $body === $pdfContent, (string) $status);
     $check('download is an attachment named after the title', str_contains((string) ($headers['content-disposition'] ?? ''), 'Pracovni-list.pdf') || str_contains((string) ($headers['content-disposition'] ?? ''), '.pdf'), (string) ($headers['content-disposition'] ?? ''));
@@ -120,6 +124,7 @@ try {
 
     WP_CLI::log('Customer without access');
     [$status, $body] = $get($detail, $other);
+    $check('no player markup without access', !str_contains($body, 'nmd-player') && !str_contains($body, '11111111-2222-4333-8444-555555555555'));
     $check('detail shows "no access", no document link', str_contains($body, 'K tomuto webináři nemáte přístup') && !str_contains($body, $document->id));
     [$status, $body] = $get($download, $other);
     $check('download 403', $status === 403 && $body !== $pdfContent, (string) $status);
@@ -132,6 +137,31 @@ try {
     $directUrl = wp_upload_dir(null, false)['baseurl'] . '/' . DocumentStorage::DIRECTORY . '/' . $document->file;
     [$status, $body] = $get($directUrl);
     $check('direct file URL denied by Apache', $status === 403 && $body !== $pdfContent, (string) $status);
+
+    WP_CLI::log('Player with Bunny configured (in-process, fake credentials)');
+    $fake = static fn () => new BunnyStream('424242', 'fake-token-key', 3600);
+    add_filter('nmd_bunny_stream', $fake);
+    ob_start();
+    (new VideoPlayer())->render(Webinar::fromProductId($recorded->get_id()), $repo->find($buyer, $recorded->get_id()));
+    $html = (string) ob_get_clean();
+    remove_filter('nmd_bunny_stream', $fake);
+    preg_match('#<iframe[^>]+src="([^"]+)"#', $html, $m);
+    $src = html_entity_decode($m[1] ?? '');
+    parse_str((string) parse_url($src, PHP_URL_QUERY), $query);
+    $check('iframe points to the library + video', str_starts_with($src, 'https://iframe.mediadelivery.net/embed/424242/11111111-2222-4333-8444-555555555555?'), $src);
+    $check('token valid for this video and expiry', isset($query['token'], $query['expires'])
+        && hash_equals(hash('sha256', 'fake-token-key11111111-2222-4333-8444-555555555555' . $query['expires']), $query['token']));
+    $check('link expires in about 1 hour', isset($query['expires']) && abs((int) $query['expires'] - (time() + 3600)) < 60);
+    $check('iframe sends origin referrer (for Bunny allowed domains)', str_contains($html, 'referrerpolicy="origin"'));
+    ob_start();
+    wc_get_template('myaccount/webinar-video.php', [
+        'webinar' => Webinar::fromProductId($recorded->get_id()),
+        'embedUrl' => '',
+        'error' => 'not_configured',
+        'showDeveloperHint' => false,
+    ], 'namoudusi-webinars/', WebinarsEndpoint::templateDir());
+    $html = (string) ob_get_clean();
+    $check('production fallback: friendly message, no developer details', str_contains($html, 'woocommerce-info') && !str_contains($html, 'NAMOUDUSI_'));
 
     WP_CLI::log('Expired access');
     $repo->update($repo->find($buyer, $recorded->get_id())->id, ['expires_at' => new DateTimeImmutable('-1 day', new DateTimeZone('UTC'))]);
