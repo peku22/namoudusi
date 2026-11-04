@@ -8,6 +8,7 @@ use Namoudusi\Webinars\Access\AccessFormatter;
 use Namoudusi\Webinars\Access\AccessService;
 use Namoudusi\Webinars\Access\Entitlement;
 use Namoudusi\Webinars\Access\EntitlementRepository;
+use Namoudusi\Webinars\Checkout\DigitalConsent;
 use Namoudusi\Webinars\Product\Webinar;
 use Namoudusi\Webinars\Product\WebinarProducts;
 
@@ -50,6 +51,7 @@ final class AccessAdmin
         if (!$order instanceof \WC_Order) {
             return;
         }
+        $this->renderConsent($order);
         $entitlements = $this->entitlements->forOrder($order->get_id());
         if ($entitlements === []) {
             echo '<p>' . esc_html__('No webinar access granted by this order.', 'namoudusi-webinars') . '</p>';
@@ -75,6 +77,34 @@ final class AccessAdmin
             );
         }
         echo '</ul>';
+    }
+
+    /**
+     * Consent to immediate delivery of digital content (block checkout field), for orders with webinars.
+     */
+    private function renderConsent(\WC_Order $order): void
+    {
+        $consent = DigitalConsent::forOrder($order);
+        if ($consent !== null) {
+            printf(
+                '<p class="nmd-consent"><strong>%s</strong><br>%s<br><small>%s</small></p>',
+                esc_html__('Consent to immediate delivery:', 'namoudusi-webinars'),
+                /* translators: %s: date and time */
+                esc_html(sprintf(__('given %s', 'namoudusi-webinars'), AccessFormatter::date($consent['givenAt']))),
+                esc_html($consent['text'])
+            );
+            return;
+        }
+        foreach ($order->get_items() as $item) {
+            if ($item instanceof \WC_Order_Item_Product && Webinar::fromProductId($item->get_product_id()) !== null) {
+                printf(
+                    '<p class="nmd-consent"><strong>%s</strong><br>%s</p>',
+                    esc_html__('Consent to immediate delivery:', 'namoudusi-webinars'),
+                    esc_html__('not given (e.g. order created in the admin) – the customer keeps the right of withdrawal.', 'namoudusi-webinars')
+                );
+                return;
+            }
+        }
     }
 
     public function renderUserSection(\WP_User $user): void

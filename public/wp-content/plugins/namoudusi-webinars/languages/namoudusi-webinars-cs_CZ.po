@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-11-03T17:42:50+01:00\n"
-"PO-Revision-Date: 2026-11-03T16:42:50+00:00\n"
+"PO-Revision-Date: 2026-11-04T05:14:54+00:00\n"
 "Language: cs_CZ\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Domain: namoudusi-webinars\n"
@@ -117,66 +117,81 @@ msgstr "Tento webinář zatím nemá termín."
 msgid "Back to My webinars"
 msgstr "Zpět na Moje webináře"
 
-#: src/Admin/AccessAdmin.php:40
-#: src/Admin/AccessAdmin.php:88
+#: src/Admin/AccessAdmin.php:41
+#: src/Admin/AccessAdmin.php:118
 msgid "Webinar access"
 msgstr "Přístupy k webinářům"
 
-#: src/Admin/AccessAdmin.php:55
+#: src/Admin/AccessAdmin.php:57
 msgid "No webinar access granted by this order."
 msgstr "Tato objednávka neudělila přístup k žádnému webináři."
 
-#: src/Admin/AccessAdmin.php:65
+#: src/Admin/AccessAdmin.php:67
 msgid "Zoom: registered"
 msgstr "Zoom: zaregistrován"
 
-#: src/Admin/AccessAdmin.php:66
+#: src/Admin/AccessAdmin.php:68
 msgid "Zoom: waiting for registration"
 msgstr "Zoom: čeká na registraci"
 
+#: src/Admin/AccessAdmin.php:91
+#: src/Admin/AccessAdmin.php:102
+msgid "Consent to immediate delivery:"
+msgstr "Souhlas se zpřístupněním ihned:"
+
+#. translators: %s: date and time
 #: src/Admin/AccessAdmin.php:93
-#: src/Admin/AccessAdmin.php:127
+#, php-format
+msgid "given %s"
+msgstr "udělen %s"
+
+#: src/Admin/AccessAdmin.php:103
+msgid "not given (e.g. order created in the admin) – the customer keeps the right of withdrawal."
+msgstr "neudělen (např. objednávka vytvořená v administraci) – zákazníkovi zůstává právo odstoupit od smlouvy."
+
+#: src/Admin/AccessAdmin.php:123
+#: src/Admin/AccessAdmin.php:157
 #: src/Product/WebinarFields.php:40
 msgid "Webinar"
 msgstr "Webinář"
 
-#: src/Admin/AccessAdmin.php:94
+#: src/Admin/AccessAdmin.php:124
 msgid "Source"
 msgstr "Zdroj"
 
-#: src/Admin/AccessAdmin.php:95
+#: src/Admin/AccessAdmin.php:125
 msgid "Granted"
 msgstr "Uděleno"
 
-#: src/Admin/AccessAdmin.php:96
+#: src/Admin/AccessAdmin.php:126
 msgid "Expires"
 msgstr "Platnost do"
 
-#: src/Admin/AccessAdmin.php:97
+#: src/Admin/AccessAdmin.php:127
 msgid "Status"
 msgstr "Stav"
 
-#: src/Admin/AccessAdmin.php:98
+#: src/Admin/AccessAdmin.php:128
 msgid "Revoke"
 msgstr "Odebrat"
 
-#: src/Admin/AccessAdmin.php:103
+#: src/Admin/AccessAdmin.php:133
 msgid "No webinar access yet."
 msgstr "Zatím žádné přístupy k webinářům."
 
-#: src/Admin/AccessAdmin.php:124
+#: src/Admin/AccessAdmin.php:154
 msgid "Grant access"
 msgstr "Udělit přístup"
 
-#: src/Admin/AccessAdmin.php:130
+#: src/Admin/AccessAdmin.php:160
 msgid "— Select —"
 msgstr "— Vyberte —"
 
-#: src/Admin/AccessAdmin.php:140
+#: src/Admin/AccessAdmin.php:170
 msgid "Access until"
 msgstr "Přístup do"
 
-#: src/Admin/AccessAdmin.php:144
+#: src/Admin/AccessAdmin.php:174
 msgid "Leave empty for no time limit. Replaces any existing expiry of this webinar."
 msgstr "Prázdné = bez časového omezení. Nahradí dosavadní platnost přístupu k tomuto webináři."
 
@@ -195,6 +210,20 @@ msgstr ""
 #, php-format
 msgid "Your personal Zoom link will be on the webinar page: %s"
 msgstr "Váš osobní odkaz na Zoom najdete na stránce webináře: %s"
+
+#: src/Checkout/DigitalConsent.php:66
+msgid "Please confirm the consent to immediate delivery of the digital content."
+msgstr "Potvrďte prosím souhlas se zpřístupněním digitálního obsahu."
+
+#: src/Checkout/DigitalConsent.php:73
+msgid "I agree that the digital content will be made available to me immediately after payment, and I acknowledge that I thereby lose the right to withdraw from the contract."
+msgstr "Souhlasím s tím, aby mi byl digitální obsah zpřístupněn ihned po zaplacení, a beru na vědomí, že tím ztrácím právo odstoupit od smlouvy."
+
+#. translators: %s: consent wording
+#: src/Checkout/DigitalConsent.php:91
+#, php-format
+msgid "Customer consented to immediate delivery of digital content: \"%s\""
+msgstr "Zákazník souhlasil se zpřístupněním digitálního obsahu ihned: „%s“"
 
 #: src/Email/AccessGrantedEmail.php:12
 msgid "Webinar access granted"
@@ -280,11 +309,11 @@ msgstr "Váš odkaz na Zoom je připraven"
 msgid "Your personal link to the live webinar is ready. Please do not share it – it only works for you."
 msgstr "Váš osobní odkaz na živý webinář je připraven. Prosíme, nesdílejte ho – funguje jen pro vás."
 
-#: src/Plugin.php:103
+#: src/Plugin.php:106
 msgid "Na mou duši – Webináře requires WooCommerce to be active."
 msgstr "Na mou duši – Webináře vyžaduje aktivní WooCommerce."
 
-#: src/Plugin.php:118
+#: src/Plugin.php:121
 msgid "Na mou duši – Webináře: missing wp-config.php constants:"
 msgstr "Na mou duši – Webináře: ve wp-config.php chybí konstanty:"
 

@@ -77,6 +77,8 @@ Migrator: option `nmd_db_version`. Numbered migration classes run in order on `p
 
 **Reminders** → per product, Action Scheduler single actions `nmd_webinar_reminder` [product, 24h|1h] at start −24 h and −1 h, kept in sync on every product save (`woocommerce_after_product_object_save`, idempotent; a reminder whose time already passed is not scheduled). The job fans out one `nmd_webinar_notify` send job per active holder; product meta `_nmd_reminders_sent` makes it fire once per start time. Guards: job running >30 min off its planned time (cron outage, moved start) is skipped; send jobs for an outdated start or ended access send nothing. Unscheduled when the product is deleted; no-op when it is no longer live. Log warning if a webinar is about to start without a Zoom ID.
 
+**Checkout consent** (block checkout, `Checkout/DigitalConsent`) → Additional Checkout Field `namoudusi/digital-content-consent` (checkbox, location *order*). The Store API cart carries `extensions.namoudusi.has_webinar`; the field's JSON-schema rules show and require it only when the cart has a webinar (evaluated in the browser and again on the server; a missing flag = visible and required). WooCommerce stores the value (`_wc_other/namoudusi/digital-content-consent`); on `woocommerce_store_api_checkout_order_processed` we add `_nmd_digital_consent_at` (UTC) and `_nmd_digital_consent_text` (the exact wording, in the customer's language) plus an order note. Shown in the order's "Webinar access" box (orders created in the admin show "not given"), on the order confirmation page and in WooCommerce order emails. Access is granted regardless – without consent the customer simply keeps the right of withdrawal. Wording to be confirmed by the lawyer (§ 1837 písm. l) OZ; for live webinars possibly § 1837 písm. j)).
+
 **Refund / cancel** → revoke the entitlement, cancel the Zoom registrant.
 
 **Manual grant** → admin: user profile / product screen "Udělit přístup" (grant access), with optional expiry. Same flow from step 3 on.
@@ -163,7 +165,7 @@ namoudusi-webinars/
 | M4 ✅ | Bunny signed player | Video plays in the account; the copied embed URL stops working after expiry and on other domains |
 | M5 ✅ | Zoom registrants (incl. late ID, cancel), access email + .ics | Personal join URL on the page and in the email; refund cancels the registrant |
 | M6 ✅ | Reminders 24 h / 1 h, reschedule on time change, expiry follows the start | Emails arrive in Mailpit at the right times (tested with a near-future start) |
-| M7 | Checkout consent checkbox | Checkout fails without it; consent + timestamp visible on the order |
+| M7 ✅ | Checkout consent checkbox | Checkout fails without it; consent + timestamp visible on the order |
 
 Separate tracks, not in this plugin: payment gateway (Comgate/GoPay), Fakturoid, GitHub Actions deploy to Webglobe, theme/design.
 

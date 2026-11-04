@@ -11,6 +11,7 @@ use Namoudusi\Webinars\Access\OrderListener;
 use Namoudusi\Webinars\Account\ProductPage;
 use Namoudusi\Webinars\Account\WebinarsEndpoint;
 use Namoudusi\Webinars\Admin\AccessAdmin;
+use Namoudusi\Webinars\Checkout\DigitalConsent;
 use Namoudusi\Webinars\Cli\AccessCommand;
 use Namoudusi\Webinars\Cli\ZoomCommand;
 use Namoudusi\Webinars\Database\Migrator;
@@ -52,7 +53,8 @@ final class Plugin
 
         Migrator::migrateIfNeeded();
 
-        add_action('init', [self::class, 'loadTextDomain']);
+        // Registers the translation path only (WP loads it on first use) – early enough for woocommerce_init.
+        self::loadTextDomain();
         add_action('admin_notices', [self::class, 'configNotice']);
 
         $entitlements = new EntitlementRepository();
@@ -67,6 +69,7 @@ final class Plugin
         (new Emails())->register();
         (new Reminders($entitlements))->register();
         (new StartChange($entitlements))->register();
+        (new DigitalConsent())->register();
         add_action('before_delete_post', [self::class, 'deleteProductDocuments'], 10, 2);
         if (is_admin()) {
             (new WebinarFields())->register();

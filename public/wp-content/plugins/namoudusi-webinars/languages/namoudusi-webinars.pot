@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-03T17:42:46+01:00\n"
+"POT-Creation-Date: 2026-11-04T06:14:54+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 3.0.0-alpha-6bf617c\n"
 "X-Domain: namoudusi-webinars\n"
@@ -118,66 +118,81 @@ msgstr ""
 msgid "Back to My webinars"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:40
-#: src/Admin/AccessAdmin.php:88
+#: src/Admin/AccessAdmin.php:41
+#: src/Admin/AccessAdmin.php:118
 msgid "Webinar access"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:55
+#: src/Admin/AccessAdmin.php:57
 msgid "No webinar access granted by this order."
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:65
+#: src/Admin/AccessAdmin.php:67
 msgid "Zoom: registered"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:66
+#: src/Admin/AccessAdmin.php:68
 msgid "Zoom: waiting for registration"
 msgstr ""
 
+#: src/Admin/AccessAdmin.php:91
+#: src/Admin/AccessAdmin.php:102
+msgid "Consent to immediate delivery:"
+msgstr ""
+
+#. translators: %s: date and time
 #: src/Admin/AccessAdmin.php:93
-#: src/Admin/AccessAdmin.php:127
+#, php-format
+msgid "given %s"
+msgstr ""
+
+#: src/Admin/AccessAdmin.php:103
+msgid "not given (e.g. order created in the admin) – the customer keeps the right of withdrawal."
+msgstr ""
+
+#: src/Admin/AccessAdmin.php:123
+#: src/Admin/AccessAdmin.php:157
 #: src/Product/WebinarFields.php:40
 msgid "Webinar"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:94
+#: src/Admin/AccessAdmin.php:124
 msgid "Source"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:95
+#: src/Admin/AccessAdmin.php:125
 msgid "Granted"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:96
+#: src/Admin/AccessAdmin.php:126
 msgid "Expires"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:97
+#: src/Admin/AccessAdmin.php:127
 msgid "Status"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:98
+#: src/Admin/AccessAdmin.php:128
 msgid "Revoke"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:103
+#: src/Admin/AccessAdmin.php:133
 msgid "No webinar access yet."
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:124
+#: src/Admin/AccessAdmin.php:154
 msgid "Grant access"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:130
+#: src/Admin/AccessAdmin.php:160
 msgid "— Select —"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:140
+#: src/Admin/AccessAdmin.php:170
 msgid "Access until"
 msgstr ""
 
-#: src/Admin/AccessAdmin.php:144
+#: src/Admin/AccessAdmin.php:174
 msgid "Leave empty for no time limit. Replaces any existing expiry of this webinar."
 msgstr ""
 
@@ -193,6 +208,20 @@ msgstr ""
 #: src/Calendar/WebinarCalendar.php:28
 #, php-format
 msgid "Your personal Zoom link will be on the webinar page: %s"
+msgstr ""
+
+#: src/Checkout/DigitalConsent.php:66
+msgid "Please confirm the consent to immediate delivery of the digital content."
+msgstr ""
+
+#: src/Checkout/DigitalConsent.php:73
+msgid "I agree that the digital content will be made available to me immediately after payment, and I acknowledge that I thereby lose the right to withdraw from the contract."
+msgstr ""
+
+#. translators: %s: consent wording
+#: src/Checkout/DigitalConsent.php:91
+#, php-format
+msgid "Customer consented to immediate delivery of digital content: \"%s\""
 msgstr ""
 
 #: src/Email/AccessGrantedEmail.php:12
@@ -279,11 +308,11 @@ msgstr ""
 msgid "Your personal link to the live webinar is ready. Please do not share it – it only works for you."
 msgstr ""
 
-#: src/Plugin.php:103
+#: src/Plugin.php:106
 msgid "Na mou duši – Webináře requires WooCommerce to be active."
 msgstr ""
 
-#: src/Plugin.php:118
+#: src/Plugin.php:121
 msgid "Na mou duši – Webináře: missing wp-config.php constants:"
 msgstr ""
 
